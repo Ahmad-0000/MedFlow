@@ -68,8 +68,51 @@ html {
 
 .container .user-info {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
+}
+
+.container .user-info .id {
+    position: absolute;
+    top: -20px;
+    left: 50px;
+    font-size: 18px;
+}
+
+.container .user-info .bio {
+    width: 80%;
+    font-size: 18px;
+}
+
+.container .user-info .bio div {
+    padding: 10px;
+}
+
+.container .user-info .bio .edu {
+    width: 60%;
+}
+
+.container .user-info .bio .content {
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding-top: 35px;
+    }
+
+    .container .user-info .id {
+        top: -20px;
+        left: 50px;
+        font-size: 14px;
+    }
+
+    .container .user-info .bio {
+        font-size: 14px;
+    }
 }
 
 .container .user-info .image {
@@ -84,11 +127,20 @@ html {
     font-size: 18px;
 }
 
+.container .user-info .id {
+    color: var(--main-color);
+}
+
 .container .user-info .info p {
     margin: 8px 0;
 }
 
-.container .user-info span {
+.container .user-info .info span {
+    color: var(--main-color);
+}
+
+.container .user-info .bio span:hover {
+    cursor: pointer;
     color: var(--main-color);
 }
 
