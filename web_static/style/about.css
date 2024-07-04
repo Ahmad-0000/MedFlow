@@ -1,0 +1,163 @@
+/* Start Global Rules */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+:root {
+    --main-color: #ff9800;
+}
+
+a {
+    text-decoration: none;
+    color: #575757;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 700px;
+    margin: 0 auto;
+    padding: 100px 15px 15px 15px;
+    position: relative;
+}
+
+::selection {
+    background-color: var(--main-color);
+    color: white;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding-top: 10px;
+        width: 400px;
+        margin: 0 auto;
+    }
+
+}
+
+@media (min-width: 991px) {
+    .container {
+        width: 700px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1199px) {
+    .container {
+        width: 800px;
+        margin: 0 auto;
+    }
+}
+/* End Global Rules */
+
+
+/* Start Aside */
+
+.container .aside {
+    position: absolute;
+    right: -200px;
+    width: 180px;
+    border: 1px solid var(--main-color);
+    border-radius: 5px;
+}
+
+.container .aside h3    {
+    text-align: center;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.container ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.container ul li a {
+    display: block;
+    padding: 5px 10px;
+    font-size: 19px;
+}
+
+.container ul li:not(:last-child) {
+    border-bottom: 1px solid var(--main-color);
+}
+
+.container ul li a:hover {
+    padding-left: 20px;
+    color: color(--main-color);
+}
+
+@media (max-width: 1115px) {
+    .container .aside {
+        position: static;
+        width: auto;
+        border: none;
+    }
+
+    .container .aside h3    {
+        text-align: left;
+        color: var(--main-color);
+        font-weight: bold;
+    }
+
+    .container ul {
+        list-style-type: disc;
+        margin: 0;
+        padding-left: 30px;
+    }
+
+    .container ul li:not(:last-child) {
+        border-bottom: none;
+    }
+
+    .container ul li a {
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+}
+
+/* End Aside */
+
+/* Start Main */
+.container h2 {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+.container .aside h2  {
+    text-align: center;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.main h3 {
+    font-size: 25px;
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.main p {
+    color: #555;
+}
+
+@media (max-width: 767px) {
+    .container h2 {
+        font-size: 20px;
+    }
+    
+    .container h3 {
+        font-size: 20px;
+    }
+}
+/* End Main */

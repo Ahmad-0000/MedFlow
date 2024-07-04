@@ -1,0 +1,127 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 0 10px;
+    align-items: center;
+    border-bottom: 1px solid var(--main-color);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    background-color: white;
+    box-shadow: 0 1px 15px var(--main-color);
+}
+
+header .logo {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+header .logo  a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+header .nav {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    transition: 0.3s;
+}
+
+header .nav a {
+    padding: 25px;
+    display: block;
+    transition: 0.4s;
+}
+
+header .nav a:hover {
+    color: white;
+    background-color: var(--main-color);
+}
+
+span.icon {
+    display: none;
+}
+
+span.icon:hover span:nth-child(2) {
+    width: 100%;
+}
+
+span.icon:hover #nav {
+    background-color: pink;
+}
+
+@media (max-width: 767px) {
+    header {
+        display: block;
+        padding:10px;
+        text-align: center;
+        border-bottom: 1px solid var(--main-color);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 10;
+        background-color: white;
+        box-shadow: 0 1px 15px var(--main-color);
+        position: relative;
+    }
+
+    header .logo {
+        font-size: 30px;
+    }
+
+    header .nav {
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        width: 0px;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 15;
+        background-color: white;
+        box-shadow: 0 1px 15px var(--main-color);
+    }
+
+    header .nav a {
+        display: none;
+        padding: 20px;
+    }
+
+    span.icon {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-end;
+        height: 20px;
+        width: 20px;
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        cursor: pointer;
+    }
+    
+    span.icon span {
+        display: block;
+        height: 2px;
+        background-color: black;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    span.icon span:nth-child(2) {
+        width: 50%;
+        transition: 0.3s;
+    }
+
+    span.icon:hover span:nth-child(2) {
+        width: 100%;
+    }
+    
+    span.icon:hover #nav a {
+        background-color: pink;
+    }
+}

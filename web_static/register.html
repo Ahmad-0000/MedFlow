@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="style/register.css">
+</head>
+<body>
+    <form>
+        <div class="logo">MedFlow</div>
+        <div class="info">
+            <label for="f-name">
+                First Name
+                <input id="f-name" type="text" maxlength="20" required class="half">
+            </label>
+            <label for="l-name">
+                Last Name
+                <input type="text" maxlength="20" id="l-name" required class="half">
+            </label>
+            <label for="mail">
+                Email
+                <input type="email" maxlength="50" id="mail" required>
+            </label>
+            <label for="pawd">
+                Password
+                <input type="password" maxlength="8" id="pawd">
+            </label>
+            <p id="gender">Gender</p>
+            <div class="radio">
+                <input type="radio" id="male" name="gender" value="M">
+                <label for="male">Male</label>
+            </div>
+            <div class="radio">
+                <input type="radio" id="female" name="gender" value="F"> 
+                <label for="female">Female</label>
+            </div>
+            <label for="b-date">
+                Birth Date
+                <input type="date">
+            </label>
+            <label for="agree">
+                <input type="checkbox" id="agree">
+                I gree to the <a href="#">Terms of Services</a> and <a href="#">Privacy Policy</a>
+            </label>
+            <input type="submit" value="Register" id="register">
+            <p class="center">Already have an account ? <a href="#">Login</a></p>
+        </div>
+    </form>
+</body>
+</html>

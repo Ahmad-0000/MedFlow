@@ -1,0 +1,133 @@
+/* Start Global Rules */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+}
+
+:root {
+    --main-color: #ff9800;
+}
+/* End Global Rules */
+
+form {
+    padding: 50px 50px;
+    border: 2px solid var(--main-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: var(--main-color);
+}
+
+.info label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.info input {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 36px;
+    padding-left: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: 0.3s;
+    color: #555555;
+}
+
+.info .half {
+    width: 230px;
+}
+
+.info input:focus {
+    border: 1px solid var(--main-color);
+    outline: none;
+    box-shadow: 2px 2px 10px var(--main-color)
+}
+
+#register {
+    width: fit-content;
+    margin: 5px auto;
+    background-color: var(--main-color);
+    color: white;
+    padding: 6px 20px;
+    font-size: 16px;
+    border: none;
+    border: 2px solid var(--main-color);
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+#register:hover {
+    background-color: white;
+    color: var(--main-color);
+    cursor: pointer;
+    padding: 6px 20px;
+}
+
+input[type='radio'] {
+    display: inline;
+    height: auto;
+    width: auto;
+    margin: 0 10px 0 0;
+}
+
+div.radio {
+    margin-bottom: 10px;
+}
+
+input[type='checkbox'] {
+    display: inline;
+    width: auto;
+    height: auto;
+}
+
+p.center {
+    text-align: center;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--main-color);
+}
+
+@media (max-width: 767px) {
+    form {
+        padding: 10px 10px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+
+    .info input {
+        width: 100%;
+    }
+
+    .info input[type='radio'],
+    .info input[type='checkbox'] {
+        width: fit-content;
+    }
+    label[for='agree'] {
+        font-size: 11px;
+    }
+}

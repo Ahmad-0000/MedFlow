@@ -1,0 +1,139 @@
+* {
+    transition: 0.3s;
+}
+
+footer {
+    border-top: 1px solid var(--main-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 40px 20px;
+}
+
+footer .col {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+}
+
+footer .logo a {
+    display: block;
+    font-size: 60px;
+    color: var(--main-color);
+    font-weight: bold;
+    padding: 10px;
+}
+
+footer .links {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+}
+
+.footer .links .col {
+    width: fit-content;
+}
+
+footer a {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+footer .col a {
+    position: relative;
+    display: block;
+    width: fit-content;
+}
+
+footer .col a:before {
+    content: "";
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    background-color: var(--main-color);
+    position: absolute;
+    transition: 0.3s;
+}
+
+footer .col a:hover:before {
+    width: 100%;
+}
+
+footer p:first-of-type {
+    font-size: 20px;
+    margin: 0 0 7px;
+}
+
+footer span {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--main-color);
+}
+
+footer p:last-of-type {
+    font-size: 20px;
+    margin: 7px 0;
+}
+
+footer .social {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 25px;
+}
+
+footer .social a:hover {
+    color: var(--main-color);
+}
+
+@media (max-width: 991px) {
+    footer {
+        padding: 20px 20px 10px;
+    }
+
+    footer .logo a {
+        font-size: 30px;
+    }
+
+    footer a {
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
+
+    footer p:first-of-type,
+    footer p:last-of-type {
+        font-size: 15px;
+    }
+
+    footer span {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+    footer {
+        padding: 10px 10px 10px;
+    }
+
+    footer .logo a {
+        font-size: 15px;
+    }
+
+    footer a {
+        margin-bottom: 10px;
+        font-size: 10px;
+    }
+
+    footer p:first-of-type,
+    footer p:last-of-type {
+        font-size: 10px;
+    }
+
+    footer span {
+        font-size: 15px;
+    }
+
+    footer .social {
+        min-width: 40px;
+    }
+}
