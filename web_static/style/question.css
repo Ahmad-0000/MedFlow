@@ -18,6 +18,10 @@ a {
     color: #575757;
 }
 
+a:hover {
+    color: var(--main-color);
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -68,8 +72,8 @@ html {
 
 .container > div {
     width: 48%;
-    border: 1px solid var(--main-color);
-    border-radius: 3px;
+    border: 3px solid var(--main-color);
+    border-radius: 10px;
 }
 
 @media (max-width: 991px) {
@@ -182,9 +186,9 @@ i:hover {
 .container .answer {
     position: relative;
     padding: 10px;
-    border: 1px solid var(--main-color);
+    border: 3px solid var(--main-color);
     margin-top: 10px;
-    border-radius: 3px;
+    border-radius: 10px;
 }
 
 .container .answer .com {
