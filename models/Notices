@@ -1,0 +1,8 @@
+The Console:
+    Didn't finish.
+
+MySQL:
+    pool_pre_ping.
+    expire_on_commit
+    scoped_session
+    viewonly
