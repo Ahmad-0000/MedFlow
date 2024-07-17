@@ -3,13 +3,13 @@
 Contains main class to manage storage
 """
 from os import getenv
+from hashlib import md5
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.user import User
 from models.question import Question
 from models.answer import Answer
 from models.comments import QueComment, AnsComment
-from models.tags import Tag
 from models.base_model import Base
 
 
@@ -81,3 +81,25 @@ class Storage():
     def close(self):
         """Close the current session"""
         Storage.__session.close()
+
+    def check_user(self, email, password, status="r"):
+        """Check if the user with <email> and <password> exists"""
+        if status == "r":
+            bpassword = password.encode()
+            m = md5()
+            m.update(bpassword)
+            password = m.hexdigest()
+        user = Storage.__session.query(User).filter_by(email=email).one_or_none()
+        if user:
+            return user
+        user = Storage.__session.query(User).filter_by(password=password).one_or_none()
+        if user:
+            return user
+        return False
+
+    def question_fts(self, sentence):
+        """Perform fts against questions table using <sentence>"""
+        return Storage.__session.query(Question).\
+                from_statement(
+                text('SELECT * FROM questions WHERE MATCH (title, body) AGAINST (":sentence")'))\
+                .params(sentence=sentence).all()
