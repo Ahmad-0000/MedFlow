@@ -7,24 +7,24 @@
     <link rel="stylesheet" href="style/register.css">
 </head>
 <body>
-    <form>
+    <form action="http://localhost:5000/api/v1/users" method="post">
         <div class="logo">MedFlow</div>
         <div class="info">
             <label for="f-name">
                 First Name
-                <input id="f-name" type="text" maxlength="20" required class="half">
+                <input id="f-name" type="text" maxlength="20" required class="half" name="first_name">
             </label>
             <label for="l-name">
                 Last Name
-                <input type="text" maxlength="20" id="l-name" required class="half">
+                <input type="text" maxlength="20" id="l-name" required class="half" name="last_name">
             </label>
             <label for="mail">
                 Email
-                <input type="email" maxlength="50" id="mail" required>
+                <input type="email" maxlength="50" id="mail" required name="email">
             </label>
             <label for="pawd">
                 Password
-                <input type="password" maxlength="8" id="pawd" required>
+                <input type="password" maxlength="8" id="pawd" required name="password">
             </label>
             <p id="gender">Gender</p>
             <div class="radio">
@@ -37,7 +37,7 @@
             </div>
             <label for="b-date">
                 Birth Date
-                <input type="date" required>
+                <input type="date" required name="birth_date">
             </label>
             <label for="agree">
                 <input type="checkbox" id="agree" required>

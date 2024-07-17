@@ -97,17 +97,37 @@ html {
     padding: 10px;
 }
 
+/* Start Common Editing Menu Rules */
+
+.container .options {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: var(--main-color);
+    width: fit-content;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 5;
+    right: 15px;
+    top: 5px;
+    display: flex;
+}
+
+.container .options li {
+    padding: 8px;
+}
+
+#del:hover {
+    cursor: pointer;
+    color: var(--main-color);
+}
+
+/* End Common Eiditing Menu Rules */
+
 .container .question .com {
     border: 1px solid var(--main-color);
     margin: 10px;
     border-radius: 5px;
-}
-
-.container div > i.fa-ellipsis-vertical {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    font-size: 20px;
 }
 
 i:hover {
@@ -119,6 +139,7 @@ i:hover {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .container .question p {
@@ -135,6 +156,14 @@ i:hover {
 
 .container .question a:hover {
     color: var(--main-color);
+}
+
+.container .answer p:first-of-type {
+    margin-top: 24px;
+}
+
+.container .com p:first-of-type {
+    margin-top: 24px;
 }
 
 .container .question .com {
@@ -165,7 +194,6 @@ i:hover {
 }
 
 @media (max-width: 991px) {
-    .container div > i.fa-ellipsis-vertical,
     .container .question i {
         font-size: 15px;
     }

@@ -104,51 +104,6 @@ html {
 
 /* End Aside */
 
-/* Start Tags */
-.container .tags {
-    position: absolute;
-    padding: 10px;
-    left: -220px;
-    width: 200px;
-    border: 1px solid var(--main-color);
-    border-radius: 5px;
-}
-
-.container .tags h3 {
-    text-align: center;
-    color: var(--main-color);
-}
-
-.container .tags span {
-    display: inline-block;
-    padding: 5px;
-    color: var(--main-color);
-    border-radius: 20px;
-}
-
-.container .tags span:hover {
-    background-color: var(--main-color);
-    color: white;
-    cursor: pointer;
-}
-
-@media (max-width: 991px) {
-    .container .tags {
-        position: static;
-        padding: 5px;
-        width: 100%;
-        border: none;
-    }
-
-    .container .tags h3 {
-        margin: 0;
-        text-align: left;
-        color: var(--main-color);
-    }
-}
-
-/* End Tags */
-
 /* Start Questions */
 .container input {
     display: block;

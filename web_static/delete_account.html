@@ -7,18 +7,18 @@
     <link rel="stylesheet" href="style/login.css">
 </head>
 <body>
-    <form>
+    <form action="http://localhost:5000/api/v1/delete_account" method="post">
         <div class="logo">
             MedFlow
         </div>
         <div class="info">
             <label for="mail">
                 Email
-                <input id="mail" type="email" maxlength="50" required>
+                <input id="mail" type="email" maxlength="50" required name="email">
             </label>
             <label for="pawd">
                 Password
-                <input id="pawd" type="password" maxlength="8" required>
+                <input id="pawd" type="password" maxlength="8" required name="password">
             </label>
             <input type="submit" value="Delete Account" id="log">
             <label for="del"><input type="checkbox" id="del"  required> I confirm that I want to delete my account</label>

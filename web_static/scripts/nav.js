@@ -1,3 +1,5 @@
+// Handles navigation bar
+
 const navIcon = document.querySelector(".icon");
 const nav = document.querySelector("#nav");
 const links = document.querySelectorAll("#nav a")
