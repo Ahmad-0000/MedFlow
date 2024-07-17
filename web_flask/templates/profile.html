@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../static/style/profile.css?{{cache_id}}">
+    <link rel="stylesheet" href="../static/style/header.css?{{cache_id}}">
+    <link rel="stylesheet" href="../static/style/footer.css?{{cache_id}}">
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="../static/style/all.min.css?{{cache_id}}">
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/scripts/profile.js?{{cache_id}}"></script>
+    <script src="../static/scripts/nav.js?{{cache_id}}" defer></script>
+    </head>
+<body>
+    <!-- Start Header -->
+    <header>
+        <div class="logo"><a href="#">MedFlow</a></div>
+        <ul class="nav" id="nav">
+            <li><a href="http://localhost:5000/questions">Questions</a></li>
+            <li><a href="http://localhost:5000/ask">Ask</a></li>
+            <li><a href="http://localhost:5000/about">About</a></li>
+            {% if status == "in" and is_owner %}
+              <li><a href="http://localhost:5000/logout">Log out</a></li>
+              <li><a href="http://localhost:5000/delete">Delete Account</a></li>
+            {% elif status == "in" %}
+              <li><a href="http://localhost:5000/logout">Log out</a></li>
+            {% else %}
+              <li><a href="http://localhost:5000/login_page">Login</a></li>
+            {% endif %}
+        </ul>
+        <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </header>
+    <!-- End Header -->
+    <!-- Start Main -->
+    <div class="container">
+        <div class="user-info">
+          <span class="id">ID: {{user.id}}</span>
+            <div class="image"></div>
+            <div class="info">
+              <p class="f-name">{{user.first_name}}</p>
+              <p class="l-name">{{user.last_name}}</p>
+              {% if user.gender == "U" %}
+                <p class="gender">Unknown</p>
+              {% elif user.gender == "M"%}
+                <p class="gender">Male</p>
+              {% else %}
+              <p class="gender">Female</p>
+              {% endif%}
+              <p class="b-date">Birth Date: {{user.birth_date}}</p>
+              <p class="join-date">Join Date: {{user.date_joined}}</p>
+              <p class="b-stats">Questions: <span>{{questions}}</span> - Answers: <span>{{answers}}</span></p>
+            </div>
+            <div class="bio">
+                <div class="edu">
+                    <span title="Edit"><a href="http://localhost:5000/update_edu/{{user.id}}">Education</a></span>
+                    {% if user.education %}
+                    <div class="content">{{user.education}}</div>
+                    {% else %}
+                    <div class="content"></div>
+                    {% endif %}
+                </div>
+                <div class="description">
+                    <span title="Edit"><a href="http://localhost:5000/update_bio/{{user.id}}">Bio</a></span>
+                    {% if user.bio %}
+                    <div class="content">{{user.bio}}</div>
+                    {% else %}
+                    <div class="content"></div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="stats">
+            <!-- Start Questions -->
+            <div class="questions">
+              <h2>Questions</h2>
+              <div class="content">
+              </div>
+            </div>
+            <!-- End Questions -->
+            <div class="answers">
+                <h2>Answers</h2>
+                <div class="content">
+                    <!-- JQuery -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Main -->
+    <!-- Start Footer -->
+    <footer>
+        <div class="logo"><a href="#">MedFlow</a></div>
+        <div class="links">
+        <div class="col">
+            <a href="http://localhost:5000/questions">Browse questions</a>
+            <a href="http://localhost:5000/ask">Ask a question</a>
+            <a href="http://localhost:5000/about">About</a>
+        </div>
+        <div class="col">
+            <a href="http://localhost:5000/terms">Terms of Service</a>
+            <a href="http://localhost:5000/privacy">Privacy Policy</a>
+        </div>
+        </div>
+        <div class="col contact">
+            <p>Developed By:</p>
+            <span>Ahmad Basheer</span>
+            <p>contact me:</p>
+            <div class="social">
+                <a href="https://www.github.com/Ahmad-0000"><i class="fa-brands fa-github"></i></a>
+                <a href="mailto:ahmadhusain5002@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/ahmadhusainthesoftwareengineeringlearner/"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer -->
+</body>
+</html>

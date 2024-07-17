@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account</title>
+    <link rel="stylesheet" href="../static/style/login.css">
+</head>
+<body>
+    <form action="http://localhost:5000/delete_account" method="post">
+        <div class="logo">
+            MedFlow
+        </div>
+        <div class="info">
+            <label for="mail">
+                Email
+                <input id="mail" type="email" maxlength="50" required name="email">
+            </label>
+            <label for="pawd">
+                Password
+                <input id="pawd" type="password" maxlength="8" required name="password">
+            </label>
+            <input type="submit" value="Delete Account" id="log">
+            <label for="del"><input type="checkbox" id="del"  required> I confirm that I want to delete my account</label>
+        </div>
+    </form>
+</body>
+</html>

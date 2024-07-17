@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="../static/style/register.css">
+</head>
+<body>
+    <form action="/create_account" method="post">
+        <div class="logo">MedFlow</div>
+        <div class="info">
+            <label for="f-name">
+                First Name
+                <input id="f-name" type="text" maxlength="20" required class="half" name="first_name">
+            </label>
+            <label for="l-name">
+                Last Name
+                <input type="text" maxlength="20" id="l-name" required class="half" name="last_name">
+            </label>
+            <label for="mail">
+                Email
+                <input type="email" maxlength="50" id="mail" required name="email">
+            </label>
+            <label for="pawd">
+                Password
+                <input type="password" maxlength="8" id="pawd" required name="password">
+            </label>
+            <p id="gender">Gender</p>
+            <div class="radio">
+                <input type="radio" id="male" name="gender" value="M">
+                <label for="male">Male</label>
+            </div>
+            <div class="radio">
+                <input type="radio" id="female" name="gender" value="F">
+                <label for="female">Female</label>
+            </div>
+            <label for="b-date">
+                Birth Date
+                <input type="date" required name="birth_date">
+            </label>
+            <label for="agree">
+                <input type="checkbox" id="agree" required>
+                I gree to the <a href="http://localhost:5000/terms">Terms of Services</a> and <a href="http://localhost:5000/privacy">Privacy Policy</a>
+            </label>
+            <input type="submit" value="Register" id="register">
+            <p class="center">Already have an account ? <a href="http://localhost:5000/login_page">Login</a></p>
+        </div>
+    </form>
+</body>
+</html>

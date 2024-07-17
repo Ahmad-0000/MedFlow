@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment</title>
+    <link rel="stylesheet" href="../static/style/ask.css">
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="../static/style/all.min.css">
+</head>
+<body>
+            <form action="http://localhost:5000/add_question_comment_handler/{{id}}" method="post">
+                <label for="body">Content</label>
+                <textarea id="body" name="body" required maxlength="300"></textarea>
+                <input type="submit" value="Comment">
+            </form>
+</body>
+</html>

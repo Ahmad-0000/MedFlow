@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="../static/style/about.css">
+    <link rel="stylesheet" href="../static/style/header.css">
+    <link rel="stylesheet" href="../static/style/footer.css">
+    <!-- Font Awesome Library -->
+    <link rel="stylesheet" href="../static/style/all.min.css">
+    <!-- Scripts -->
+    <script src="../static/scripts/nav.js?{{cache_id}}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="#">MedFlow</a></div>
+        <ul class="nav" id="nav">
+            <li><a href="http://localhost:5000/questions">Questions</a></li>
+            <li><a href="http://localhost:5000/ask">Ask</a></li>
+            <li><a href="http://localhost:5000/about">About</a></li>
+            {% if status == "in" %}
+              <li><a href="http://localhost:5000/users/{{user_id}}"><i class="fa-solid fa-user"></i></a></li>
+            {% else %}
+              <li><a href="http://localhost:5000/login_page">Login</a></li>
+            {% endif %}
+        </ul>
+        <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+    </header>
+    <div class="content">
+        <div class="container">
+            <h2>About</h2>
+            <div class="aside"> 
+                <h3>Content</h3>
+                <ul>
+                    <li><a href="#link1">Link 1</a></li>
+                    <li><a href="#link2">Link 2</a></li>
+                    <li><a href="#link3">Link 3</a></li>
+                </ul>
+            </div>
+            <div class="main">
+                <div class="text">
+                    <h3 id="link1">Link 1</h3>
+                    <p>this is just a long text to text. this is just a long text to text. this is just a long text to text. this is just a long text to text.</p>
+                    <h3 id="link2">Link 2</h3>
+                    <p>this is just a long text to text. this is just a long text to text. this is just a long text to text. this is just a long text to text.</p>
+                    <h3 id="link3">Link 3</h3>
+                    <p>this is just a long text to text. this is just a long text to text. this is just a long text to text. this is just a long text to text.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="logo"><a href="#">MedFlow</a></div>
+   <div class="links">
+        <div class="col">
+            <a href="http://localhost:5000/questions">Browse questions</a>
+            <a href="http://localhost:5000/ask">Ask a question</a>
+            <a href="http://localhost:5000/about">About</a>
+        </div>
+        <div class="col">
+            <a href="http://localhost:5000/terms">Terms of Service</a>
+            <a href="http://localhost:5000/privacy">Privacy Policy</a>
+        </div>
+   </div>
+    <div class="col contact">
+        <p>Developed By:</p>
+        <span>Ahmad Basheer</span>
+        <p>contact me:</p>
+        <div class="social">
+            <a href="https://www.github.com/Ahmad-0000"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:ahmadhusain5002@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/ahmadhusainthesoftwareengineeringlearner/"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
