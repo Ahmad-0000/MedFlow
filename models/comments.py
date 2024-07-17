@@ -12,7 +12,6 @@ class QueComment(BaseModel, Base):
     user_id = Column(String(40), ForeignKey('users.id'), nullable=False)
     question_id = Column(String(40), ForeignKey('questions.id'), nullable=False)
     body = Column(String(300), nullable=False)
-    votes = Column(Integer, nullable=False, default=0)
     user = relationship('User', back_populates='question_comments')
     question = relationship('Question', back_populates='comments')
 
@@ -23,6 +22,5 @@ class AnsComment(BaseModel, Base):
     user_id = Column(String(40), ForeignKey('users.id'), nullable=False)
     answer_id = Column(String(40), ForeignKey('answers.id'), nullable=False)
     body = Column(String(300), nullable=False)
-    votes = Column(Integer, nullable=False, default=0)
     user = relationship('User', back_populates='answer_comments')
     answer = relationship('Answer', back_populates='comments')

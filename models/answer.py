@@ -12,7 +12,6 @@ class Answer(BaseModel, Base):
     user_id = Column(String(40), ForeignKey('users.id'), nullable=False)
     question_id = Column(String(40), ForeignKey('questions.id'), nullable=False)
     body = Column(Text, nullable=False)
-    votes = Column(Integer, nullable=False, default=0)
     user = relationship('User', back_populates='answers')
     question = relationship('Question', back_populates="answers")
     comments = relationship('AnsComment', back_populates='answer',
