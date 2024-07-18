@@ -1,0 +1,257 @@
+/* Start Global Rules */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+body {
+    margin: 0;
+}
+
+:root {
+    --main-color: #ff9800;
+}
+
+a {
+    text-decoration: none;
+    color: #575757;
+}
+
+a:hover {
+    color: #ff9800;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 700px;
+    margin: 0 auto;
+    padding: 100px 15px 15px 15px;
+    position: relative;
+}
+
+::selection {
+    background-color: var(--main-color);
+    color: white;
+}
+
+@media (max-width: 767px) {
+    .container {
+        padding-top: 10px;
+        width: 400px;
+        margin: 0 auto;
+    }
+
+}
+
+@media (min-width: 991px) {
+    .container {
+        width: 700px;
+        margin: 0 auto;
+    }
+}
+
+@media (min-width: 1199px) {
+    .container {
+        width: 900px;
+        margin: 0 auto;
+    }
+}
+/* End Global Rules */
+
+/* Star Into section */
+.cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color);
+}
+
+.cover h1 {
+    font-size: 70px;
+    color: white;
+    margin-bottom: 0;
+}
+
+.cover p {
+    margin-top: 10px;
+    font-size: 35px;
+    color: white;
+}
+
+
+.cover button {
+    border: none;
+    background-color: white;
+    outline: none;
+    font-size: 19px;
+    border-radius: 15px;
+}
+
+@media (max-width: 768px) {
+    .cover h1 {
+        font-size: 40px;
+    }
+
+    .cover p {
+        font-size: 20px;
+    }
+
+    .cover button {
+        font-size: 15px;
+    }
+}
+
+.cover a {
+    display: block;
+    padding: 7px;
+}
+
+.cover button:hover a{
+    color: var(--main-color);
+}
+
+.cover ::selection {
+    background-color: white;
+    color: var(--main-color);
+}
+
+/* End Intro section */
+
+/* Stargin Feature Section */
+.feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 100px;
+}
+
+@media (max-width: 768px) {
+    .feature {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature.two {
+        flex-direction: column-reverse;
+    }
+}
+
+
+.feature .text {
+    width: 40%;
+}
+
+.feature .image {
+    width: 55%;
+}
+
+@media (max-width: 768px) {
+    .feature .text {
+        width: 80%;
+        margin-bottom: 50px;
+    }
+
+    .feature .image {
+        width: 80%;
+    }
+}
+
+.feature h2 {
+    font-size: 28px;
+    color: var(--main-color);
+}
+
+.feature p {
+    font-size: 20px;
+    color: #575757;
+}
+
+.feature img {
+    width: 85%;
+}
+/* Ending Feature Section */
+
+/* Starging about section */
+
+#about {
+    background-color: var(--main-color);
+}
+#about .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    #about .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #about .container .description,
+    #about .container .code, 
+    #about .container .developers {
+        width: 100%;
+        text-align: center;
+        margin: 25px 0;
+    }
+}
+
+#about .container div {
+    width: 45%;
+}
+
+#about .container .code {
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 45px;
+}
+
+#about .container .description {
+    color: white;
+    font-size: 22px;
+}
+
+#about .container .description::selection {
+    color: var(--main-color);
+    background-color: white;
+}
+
+#about .container .developers {
+    font-size: 20px;
+}
+
+#about .container .developers span {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 40px;
+    font-weight: bold;
+    color: #575757;
+}
+
+#about .container .developers a {
+    margin: 0 10px;
+}
+
+#about .container .developers i {
+    font-size: 30px;
+}
+
+#about a:hover {
+    color: white;
+}
+
+#about .code a {
+    display: block;
+    margin-top: 20px;
+}
+/* Ending about section */
