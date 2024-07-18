@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question</title>
-    <link rel="stylesheet" href="../static/style/question.css?{{cache_id}}">
-    <link rel="stylesheet" href="../static/style/header.css?{{cache_id}}">
-    <link rel="stylesheet" href="../static/style/footer.css?{{cache_id}}">
+    <link rel="stylesheet" href="../../static/style/question.css?{{cache_id}}">
+    <link rel="stylesheet" href="../../static/style/header.css?{{cache_id}}">
+    <link rel="stylesheet" href="../../static/style/footer.css?{{cache_id}}">
     <!-- Font Awesome Library -->
-    <link rel="stylesheet" href="../static/style/all.min.css">
+    <link rel="stylesheet" href="../../static/style/all.min.css">
     <!-- JQuery and custom scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="../static/scripts/nav.js?{{cache_id}}" defer></script>
-    <script src="../static/scripts/question.js?{{cache_id}}"></script>
+    <script src="../../static/scripts/nav.js?{{cache_id}}" defer></script>
+    <script src="../../static/scripts/question.js?{{cache_id}}"></script>
 </head>
 <body>
     <!-- Start Header -->
     <header>
-        <div class="logo"><a href="#">MedFlow</a></div>
+        <div class="logo"><a href="ahmad-0000.github.io">MedFlow</a></div>
         <ul class="nav" id="nav">
-            <li><a href="http://localhost:5000/questions">Questions</a></li>
-            <li><a href="http://localhost:5000/ask">Ask</a></li>
-            <li><a href="http://localhost:5000/about">About</a></li>
+            <li><a href="http://web-01.ahmad-basheer.tech/medflow/questions">Questions</a></li>
+            <li><a href="http://web-01.ahmad-basheer.tech/medflow/ask">Ask</a></li>
+            <li><a href="http://web-01.ahmad-basheer.tech/medflow/about">About</a></li>
             {% if status == "in" %}
-              <li><a href="http://localhost:5000/users/{{user_id}}"><i class="fa-solid fa-user"></i></a></li>
+              <li><a href="http://web-01.ahmad-basheer.tech/medflow/users/{{user_id}}"><i class="fa-solid fa-user"></i></a></li>
             {% else %}
-              <li><a href="http://localhost:5000/login_page">Login</a></li>
+              <li><a href="http://web-01.ahmad-basheer.tech/medflow/login_page">Login</a></li>
             {% endif %}
         </ul>
         <span class="icon">
@@ -39,10 +39,10 @@
         <!-- Start Question -->
         <div class="question" data-id="{{id}}">
             <ul class="options">
-                <li><a href="http://localhost:5000/answer/{{id}}">Answer</a></li>
-                <li><a href="http://localhost:5000/update_question/{{id}}">Edit</a></li>
-                <li><a href="http://localhost:5000/add_question_comment/{{id}}">Comment</a></li>
-                <li id="del"><form action="http://localhost:5000/del_question/{{id}}", method="post"><input type="submit" value="Delete" class="del"></form></li>
+                <li><a href="http://web-01.ahmad-basheer.tech/medflow/answer/{{id}}">Answer</a></li>
+                <li><a href="http://web-01.ahmad-basheer.tech/medflow/update_question/{{id}}">Edit</a></li>
+                <li><a href="http://web-01.ahmad-basheer.tech/medflow/add_question_comment/{{id}}">Comment</a></li>
+                <li id="del"><form action="http://web-01.ahmad-basheer.tech/medflow/del_question/{{id}}", method="post"><input type="submit" value="Delete" class="del"></form></li>
             </ul>
             <div class="question-info">
                 <!-- JQuery  -->
@@ -63,16 +63,16 @@
     </div>
     <!-- Start Footer -->
     <footer>
-        <div class="logo"><a href="#">MedFlow</a></div>
+        <div class="logo"><a href="ahmad-0000.github.io">MedFlow</a></div>
         <div class="links">
         <div class="col">
-            <a href="http://localhost:5000/questions">Browse questions</a>
-            <a href="http://localhost:5000/ask">Ask a question</a>
-            <a href="http://localhost:5000/about">About</a>
+            <a href="http://web-01.ahmad-basheer.tech/medflow/questions">Browse questions</a>
+            <a href="http://web-01.ahmad-basheer.tech/medflow/ask">Ask a question</a>
+            <a href="http://web-01.ahmad-basheer.tech/medflow/about">About</a>
         </div>
         <div class="col">
-            <a href="http://localhost:5000/terms">Terms of Service</a>
-            <a href="http://localhost:5000/privacy">Privacy Policy</a>
+            <a href="http://web-01.ahmad-basheer.tech/medflow/terms">Terms of Service</a>
+            <a href="http://web-01.ahmad-basheer.tech/medflow/privacy">Privacy Policy</a>
         </div>
         </div>
         <div class="col contact">

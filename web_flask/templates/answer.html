@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Answer</title>
-    <link rel="stylesheet" href="../static/style/ask.css">
+    <link rel="stylesheet" href="../../static/style/ask.css">
     <!-- Font Awesome Library -->
-    <link rel="stylesheet" href="../static/style/all.min.css">
+    <link rel="stylesheet" href="../../static/style/all.min.css">
 </head>
 <body>
-            <form action="http://localhost:5000/answer_question/{{q_id}}" method="post">
+            <form action="http://web-01.ahmad-basheer.tech/medflow/answer_question/{{q_id}}" method="post">
                 <label for="body">Content</label>
                 <textarea id="body" name="body" required></textarea>
                 <input type="submit" value="Answer">
