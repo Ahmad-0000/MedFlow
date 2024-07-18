@@ -44,7 +44,7 @@ html {
 @media (max-width: 767px) {
     .container {
         padding-top: 10px;
-        width: 400px;
+        width: 350px;
         margin: 0 auto;
     }
 
