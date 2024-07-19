@@ -6,18 +6,18 @@ $(function () {
 
     // Get the question
     $.ajax({
-        url: `http://localhost:8080/api/v1/questions/${questionId}`,
+        url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${questionId}`,
         type: "GET",
         success: function (q) {
             questionInfoContainer.append(`
                 <h3 class="title">${q.title}</h3>
-                <p class="metadata">By <a href="/users/${q.user_id}" id="question-user-link"></a> - At <span class="created_at">${q.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span class="updated_at">${q.updated_at.replace("T"," ") + " UTC"}</span></p>
+                <p class="metadata">By <a href="/medflow/users/${q.user_id}" id="question-user-link"></a> - At <span class="created_at">${q.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span class="updated_at">${q.updated_at.replace("T"," ") + " UTC"}</span></p>
                 <p class="body">${q.body}</p>
             `)
             $(".stats span").text(q.votes);
             const userLink = $("#question-user-link");
             $.ajax({
-                url: `http://localhost:8080/api/v1/users/${q.user_id}`,
+                url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
                 type: "GET",
                 success: function (user) {
                     userLink.text(user.first_name + " " + user.last_name);
@@ -25,7 +25,7 @@ $(function () {
             });
             // Get the question comments
             $.ajax({
-                url: `http://localhost:8080/api/v1/questions/${questionId}/comments`,
+                url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${questionId}/comments`,
                 type: 'GET',
                 success: function (qComs) {
                     const qCommetnsContainer = $(".question .comments");
@@ -34,10 +34,10 @@ $(function () {
                             qCommetnsContainer.append(`
                                 <div class="com">
                                     <ul class="options">
-                                        <li><a href="http://localhost:5000/questions/${qCom.question_id}/update_comment/${qCom.id}">Edit</a></li>
-                                        <li><form action="http://localhost:5000/del_qcomment/${qCom.id}", method="post"><input type="submit" value="Delete" class="del"></form></li>
+                                        <li><a href="http://web-01.ahmad-basheer.tech/medflow/questions/${qCom.question_id}/update_comment/${qCom.id}">Edit</a></li>
+                                        <li><form action="http://web-01.ahmad-basheer.tech/medflow/del_qcomment/${qCom.id}", method="post"><input type="submit" value="Delete" class="del"></form></li>
                                     </ul>
-                                    <p class="metadata">Comment by <a href="http://localhost:5000/users/${qCom.user_id}" class="${qCom.user_id}-question-comment-user-link"></a> - At <span">${qCom.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${qCom.updated_at.replace("T", " ") + " UTC"}</span></p>
+                                    <p class="metadata">Comment by <a href="http://web-01.ahmad-basheer.tech/medflow/users/${qCom.user_id}" class="${qCom.user_id}-question-comment-user-link"></a> - At <span">${qCom.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${qCom.updated_at.replace("T", " ") + " UTC"}</span></p>
                                     <p class="body">${qCom.body}</p>
                                     <div class="comment-stats">
                                     </div>
@@ -45,7 +45,7 @@ $(function () {
                             `);
                             // Get the comment user
                             $.ajax({
-                                url: `http://localhost:8080/api/v1/users/${qCom.user_id}`,
+                                url: `http://web-01.ahmad-basheer.tech/api/v1/users/${qCom.user_id}`,
                                 type: 'GET',
                                 success: function (user) {
                                     const userLink = $(`.${user.id}-question-comment-user-link`);
@@ -65,7 +65,7 @@ $(function () {
     // Get the answers
     const answersContainer = $(".answers");
     $.ajax({
-        url: `http://localhost:8080/api/v1/questions/${questionId}/answers`,
+        url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${questionId}/answers`,
         type: 'GET',
         success: function (answers) {
             if (answers.length > 0) {
@@ -73,11 +73,11 @@ $(function () {
                     answersContainer.append(`
                         <div class="answer">
                             <ul class="options">
-                                <li><a href="http://localhost:5000/update_answer/${a.id}">Edit</a></li>
-                                <li><a href="http://localhost:5000/add_answer_comment/${a.id}">Comment</a></li>
-                                <li><form action="http://localhost:5000/del_answer/${a.id}", method="post"><input type="submit" value="Delete" class="del"></form></li>
+                                <li><a href="http://web-01.ahmad-basheer.tech/medflow/update_answer/${a.id}">Edit</a></li>
+                                <li><a href="http://web-01.ahmad-basheer.tech/medflow/add_answer_comment/${a.id}">Comment</a></li>
+                                <li><form action="http://web-01.ahmad-basheer.tech/medflow/del_answer/${a.id}", method="post"><input type="submit" value="Delete" class="del"></form></li>
                             </ul>
-                            <p class="metadata">By <a href="http://localhost:5000/users/${a.user_id}" class="${a.user_id}-answer-user-link">username</a> - At <span>${a.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${a.updated_at.replace("T", " ") + " UTC"}</span></p>
+                            <p class="metadata">By <a href="http://web-01.ahmad-basheer.tech/medflow/users/${a.user_id}" class="${a.user_id}-answer-user-link">username</a> - At <span>${a.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${a.updated_at.replace("T", " ") + " UTC"}</span></p>
                             <p>${a.body}</p>
                             <div class="comment-stats">
                                 <div class="comments" id="${a.id}"></div>
@@ -89,7 +89,7 @@ $(function () {
                     const userLink = $(`.${a.user_id}-answer-user-link`);
                     console.log(userLink)
                     $.ajax({
-                        url: `http://localhost:8080/api/v1/users/${a.user_id}`,
+                        url: `http://web-01.ahmad-basheer.tech/api/v1/users/${a.user_id}`,
                         type: 'GET',
                         success: function (user) {
                             userLink.text(user.first_name + " " + user.last_name);
@@ -99,7 +99,7 @@ $(function () {
                     const answerCommentsContainer = $(`#${a.id}`);
                     answerCommentsContainer.css("text-align", "left");
                     $.ajax({
-                        url: `http://localhost:8080/api/v1/answers/${a.id}/comments`,
+                        url: `http://web-01.ahmad-basheer.tech/api/v1/answers/${a.id}/comments`,
                         type: 'GET',
                         success: function (comments) {
                             if (comments.length > 0) {
@@ -107,10 +107,10 @@ $(function () {
                                     answerCommentsContainer.append(`
                                         <div class="com">
                                             <ul class="options">
-                                                <li><a href="http://localhost:5000/answers/${com.answer_id}/update_comment/${com.id}">Edit</a></li>
-                                                <li><form action="http://localhost:5000/del_acomment/${com.id}", method="post"><input type="submit" value="Delete" class="del"></form></li>
+                                                <li><a href="http://web-01.ahmad-basheer.tech/medflow/answers/${com.answer_id}/update_comment/${com.id}">Edit</a></li>
+                                                <li><form action="http://web-01.ahmad-basheer.tech/medflow/del_acomment/${com.id}" method="post"><input type="submit" value="Delete" class="del"></form></li>
                                             </ul>
-                                            <p class="metadata">By <a href="http://localhost:5000/users/${com.user_id}" class="${com.user_id}-answer-comment-user"></a> - At <span>${com.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${com.updated_at.replace("T", " ") + " UTC"}</span></p>
+                                            <p class="metadata">By <a href="http://web-01.ahmad-basheer.tech/medflow/users/${com.user_id}" class="${com.user_id}-answer-comment-user"></a> - At <span>${com.created_at.replace("T", " ") + " UTC"}</span> - Updtaed at <span>${com.updated_at.replace("T", " ") + " UTC"}</span></p>
                                             <p>${com.body}</p>
                                             <div class="comment-stats">
                                             </div>
@@ -119,7 +119,7 @@ $(function () {
                                     // Get the comment user
                                     const userLink = $(`.${com.user_id}-answer-comment-user`);
                                     $.ajax({
-                                        url: `http://localhost:8080/api/v1/users/${com.user_id}`,
+                                        url: `http://web-01.ahmad-basheer.tech/api/v1/users/${com.user_id}`,
                                         type: 'GET',
                                         success: function (user) {
                                             userLink.text(user.first_name + " " + user.last_name);
