@@ -5,7 +5,7 @@ from models.question import Question
 from web_flask.app import flask_app, cache_id, is_authenticated
 
 
-@flask_app.route("/questions/<int:index>")
+@flask_app.route("/medflow/questions/<int:index>")
 def some_questions(index):
     """
     Get 5 questions from the database starting from index <index>
@@ -18,7 +18,7 @@ def some_questions(index):
     return jsonify(questions_repr)
 
 
-@flask_app.route("/questions/<uuid:question_id>", strict_slashes=False)
+@flask_app.route("/medflow/questions/<uuid:question_id>", strict_slashes=False)
 def get_question(question_id):
     """Get one question based on <question_id>"""
     question_id = str(question_id)
@@ -26,14 +26,14 @@ def get_question(question_id):
     user_id = request.cookies.get("id", None)
     return render_template('question.html', id=question_id, cache_id=cache_id, status=status, user_id=user_id)
 
-@flask_app.route("/questions", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/questions", strict_slashes=False, methods=['GET'])
 def questions_page():
     """Render questions template"""
     status = request.cookies.get("status", None)
     user_id = request.cookies.get("id", None)
     return render_template("questions.html", user_id=user_id, cache_id=cache_id, status=status)
 
-@flask_app.route("/ask", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/ask", strict_slashes=False, methods=['GET'])
 def new_question():
     """Render asking template"""
     status = request.cookies.get("status", None)
@@ -48,7 +48,7 @@ def new_question():
         return make_response(render_template('regfirst.html'), 403)
     return render_template('ask.html')
 
-@flask_app.route('/create_question', strict_slashes=False, methods=['POST'])
+@flask_app.route('/medflow/create_question', strict_slashes=False, methods=['POST'])
 def create_question():
     """Create a new question"""
     user_id = request.cookies.get("id", None)
@@ -71,7 +71,7 @@ def create_question():
     else:
         return make_response(render_template('logfirst.html'), 409)
 
-@flask_app.route("/update_question/<uuid:question_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/update_question/<uuid:question_id>", strict_slashes=False, methods=['GET'])
 def update_question(question_id):
     """Render update question page"""
     question_id = str(question_id)
@@ -97,7 +97,7 @@ def update_question(question_id):
     return render_template("update_question.html", question=question)
 
 
-@flask_app.route("/update_question_handler/<uuid:question_id>", methods=['POST'], strict_slashes=False)
+@flask_app.route("/medflow/update_question_handler/<uuid:question_id>", methods=['POST'], strict_slashes=False)
 def update_question_handler(question_id):
     """Update the question with id <question_id>"""
     question_id = str(question_id)
@@ -135,7 +135,7 @@ def update_question_handler(question_id):
 
 
 
-@flask_app.route("/del_question/<uuid:q_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/del_question/<uuid:q_id>", strict_slashes=False, methods=['POST'])
 def delete_question(q_id):
     """Delete question with id <q_id>"""
     q_id = str(q_id)

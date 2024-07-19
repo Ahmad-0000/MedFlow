@@ -6,12 +6,12 @@ from models.comments import AnsComment
 from web_flask.app import flask_app, cache_id
 
 
-@flask_app.route("/add_answer_comment/<uuid:a_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/add_answer_comment/<uuid:a_id>", strict_slashes=False, methods=['GET'])
 def add_answer_comment(a_id):
     """Render the template for adding answer comments"""
     return render_template("add_answer_comment.html", a_id=a_id)
 
-@flask_app.route("/add_answer_comment_handler/<uuid:a_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/add_answer_comment_handler/<uuid:a_id>", strict_slashes=False, methods=['POST'])
 def add_answer_comment_handler(a_id):
     """Adding answer comments"""
     a_id = str(a_id)
@@ -39,13 +39,13 @@ def add_answer_comment_handler(a_id):
     return redirect(url_for('get_question', question_id=answer.question_id))
 
 
-@flask_app.route("/answers/<uuid:a_id>/update_comment/<uuid:c_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/answers/<uuid:a_id>/update_comment/<uuid:c_id>", strict_slashes=False, methods=['GET'])
 def update_answer_comment(a_id, c_id):
     """Render the template update_acomment.html"""
     return render_template("update_acomment.html", a_id=a_id, c_id=c_id)
 
 
-@flask_app.route("/answers/<uuid:a_id>/update_comment_handler/<uuid:c_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/answers/<uuid:a_id>/update_comment_handler/<uuid:c_id>", strict_slashes=False, methods=['POST'])
 def update_acomment_handler(a_id, c_id):
     """Update the answer comment"""
     a_id = str(a_id)
@@ -78,7 +78,7 @@ def update_acomment_handler(a_id, c_id):
     return redirect(url_for('get_question', question_id=a.question_id))
 
 
-@flask_app.route("/del_acomment/<uuid:c_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/del_acomment/<uuid:c_id>", strict_slashes=False, methods=['POST'])
 def del_acomment(c_id):
     """Deletes answer comment with id <c_id>"""
     c_id = str(c_id)

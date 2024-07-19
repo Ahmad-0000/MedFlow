@@ -18,7 +18,7 @@ $(function () {
         } else {
             const searchData = JSON.stringify({sentence: searchSentence, index: 0});
             $.ajax({
-                url: `http://localhost:8080/api/v1/questions_fts`,
+                url: `http://web-01.ahmad-basheer.tech/api/v1/questions_fts`,
                 type: 'POST',
                 data: searchData,
                 contentType: 'application/json',
@@ -42,12 +42,12 @@ $(function () {
                                     </p>
                                 </div>`)
                                 $.ajax({
-                                    url: `http://localhost:8080/api/v1/users/${q.user_id}`,
+                                    url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
                                     type: 'GET',
                                     success: function (user) {
                                         const userLink = $(`.${q.user_id}-user-link`);
                                         userLink.text(user.first_name + " " + user.last_name);
-                                        userLink.attr("href", `http://localhost:5000/users/${user.id}`)
+                                        userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
                                     }
                                 });
                             }
@@ -63,7 +63,7 @@ $(function () {
     })
 
     $.ajax({
-        url: `http://localhost:8080/api/v1/questions/${regularIndex}`,
+        url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${regularIndex}`,
         type: 'GET',
         success: function (questions) {
             if (questions.length > 0) {
@@ -77,12 +77,12 @@ $(function () {
                             </p>
                         </div>`)
                         $.ajax({
-                            url: `http://localhost:8080/api/v1/users/${q.user_id}`,
+                            url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
                             type: 'GET',
                             success: function (user) {
                                 const userLink = $(`.${q.user_id}-user-link`);
                                 userLink.text(user.first_name + " " + user.last_name);
-                                userLink.attr("href", `http://localhost:5000/users/${user.id}`)
+                                userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
                             }
                         });
                 }
@@ -92,7 +92,7 @@ $(function () {
                     if (!searchContext) {
                         regularIndex += 5;
                         $.ajax({
-                            url: `http://localhost:8080/api/v1/questions/${regularIndex}`,
+                            url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${regularIndex}`,
                             type: 'GET',
                             success: function (questions) {
                                 if (questions.length > 0) {
@@ -106,12 +106,12 @@ $(function () {
                                                 </p>
                                             </div>`)
                                         $.ajax({
-                                            url: `http://localhost:8080/api/v1/users/${q.user_id}`,
+                                            url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
                                             type: 'GET',
                                             success: function (user) {
                                                 const userLink = $(`.${q.user_id}-user-link`);
                                                 userLink.text(user.first_name + " " + user.last_name);
-                                                userLink.attr("href", `http://localhost:5000/users/${user.id}`)
+                                                userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
                                             }
                                         })
                                     }
@@ -128,7 +128,7 @@ $(function () {
                         searchIndex += 5;
                         const searchData = JSON.stringify({sentence: searchSentence, index: searchIndex});
                         $.ajax({
-                            url: `http://localhost:8080/api/v1/questions_fts`,
+                            url: `http://web-01.ahmad-basheer.tech/api/v1/questions_fts`,
                             type: 'POST',
                             data: searchData,
                             contentType: 'application/json',
@@ -145,12 +145,12 @@ $(function () {
                                                 </p>
                                             </div>`)
                                             $.ajax({
-                                                url: `http://localhost:8080/api/v1/users/${q.user_id}`,
+                                                url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
                                                 type: 'GET',
                                                 success: function (user) {
                                                     const userLink = $(`.${q.user_id}-user-link`);
                                                     userLink.text(user.first_name + " " + user.last_name);
-                                                    userLink.attr("href", `http://localhost:5000/users/${user.id}`)
+                                                    userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
                                                 }
                                             });
                                         }

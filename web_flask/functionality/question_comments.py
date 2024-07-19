@@ -7,12 +7,12 @@ from web_flask.app import flask_app, cache_id
 
 
 
-@flask_app.route("/questions/<uuid:q_id>/update_comment/<uuid:c_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/questions/<uuid:q_id>/update_comment/<uuid:c_id>", strict_slashes=False, methods=['GET'])
 def update_comment(q_id, c_id):
     """Render the template update_qcomment.html"""
     return render_template("update_qcomment.html", q_id=q_id, c_id=c_id)
 
-@flask_app.route("/questions/<uuid:q_id>/update_comment_handler/<uuid:c_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/questions/<uuid:q_id>/update_comment_handler/<uuid:c_id>", strict_slashes=False, methods=['POST'])
 def update_qcomment_handler(q_id, c_id):
     """Update the question comment"""
     q_id = str(q_id)
@@ -45,7 +45,7 @@ def update_qcomment_handler(q_id, c_id):
     return redirect(url_for('get_question', question_id=q_id))
 
     
-@flask_app.route("/del_qcomment/<uuid:c_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/del_qcomment/<uuid:c_id>", strict_slashes=False, methods=['POST'])
 def del_qcomment(c_id):
     """Deletes question comment with id <q_comment>"""
     c_id = str(c_id)
@@ -73,12 +73,12 @@ def del_qcomment(c_id):
     storage.delete(comment)
     return redirect(url_for('get_question', question_id=q_id))
 
-@flask_app.route("/add_question_comment/<uuid:question_id>", strict_slashes=False)
+@flask_app.route("/medflow/add_question_comment/<uuid:question_id>", strict_slashes=False)
 def add_question_comment(question_id):
     """Renders a page to adding a question comment"""
     return render_template("question_comment.html", id=question_id)
 
-@flask_app.route("/add_question_comment_handler/<uuid:q_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/add_question_comment_handler/<uuid:q_id>", strict_slashes=False, methods=['POST'])
 def add_question_comment_handler(q_id):
     """Adds a question comment"""
     q_id = str(q_id)
@@ -105,5 +105,4 @@ def add_question_comment_handler(q_id):
     com = QueComment(question_id=q.id, user_id=user_id, **data)
     storage.add(com)
     storage.save()
-    return redirect(url_for('get_question', question_id=q.id))
-    
+    return redirect(url_for('get_question', question_id=q.id)) 

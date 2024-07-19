@@ -15,21 +15,21 @@ cache_id = str(uuid4())
 
 
 
-@flask_app.route("/about", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/about", strict_slashes=False, methods=['GET'])
 def about():
     """Render about page"""
     status = request.cookies.get("status", None)
     user_id = request.cookies.get("id", None)
     return render_template("about.html", status=status, user_id=user_id, cache_id=cache_id)
 
-@flask_app.route("/terms", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/terms", strict_slashes=False, methods=['GET'])
 def terms():
     """Renders terms of service page"""
     status = request.cookies.get("status", None)
     user_id = request.cookies.get("id", None)
     return render_template("terms.html", status=status, user_id=user_id)
 
-@flask_app.route("/privacy", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/privacy", strict_slashes=False, methods=['GET'])
 def privacy():
     """Renders privacy policy page"""
     status = request.cookies.get("status", None)
@@ -70,12 +70,9 @@ def nf(error):
     """Handles 404 error"""
     return make_response(render_template('nf.html'), 404)
 
-
-if __name__ == "__main__":
-    from web_flask.functionality.profile import *
-    from web_flask.functionality.authentication import *
-    from web_flask.functionality.question_interaction import *
-    from web_flask.functionality.question_comments import *
-    from web_flask.functionality.answer_interaction import *
-    from web_flask.functionality.answer_comments import *
-    flask_app.run(host="0.0.0.0", port=5000, debug=True)
+from web_flask.functionality.profile import *
+from web_flask.functionality.authentication import *
+from web_flask.functionality.question_interaction import *
+from web_flask.functionality.question_comments import *
+from web_flask.functionality.answer_interaction import *
+from web_flask.functionality.answer_comments import *

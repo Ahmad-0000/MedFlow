@@ -5,7 +5,7 @@ from web_flask.app import flask_app, cache_id
 
 
 
-@flask_app.route("/users/<uuid:user_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/users/<uuid:user_id>", strict_slashes=False, methods=['GET'])
 def user_profile(user_id):
     """Render the profile of the user with the id <user_id>"""
     user_id = str(user_id)
@@ -38,12 +38,12 @@ def user_profile(user_id):
     return render_template('profile.html', user=owner, status=status, questions=q, answers=a, is_owner=is_owner)
 
 
-@flask_app.route("/update_bio/<uuid:user_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/update_bio/<uuid:user_id>", strict_slashes=False, methods=['GET'])
 def udpate_bio(user_id):
     """Render the template for updating the bio"""
     return render_template("update_bio.html", user_id=user_id)
 
-@flask_app.route("/update_bio_handler/<uuid:user_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/update_bio_handler/<uuid:user_id>", strict_slashes=False, methods=['POST'])
 def update_bio_handler(user_id):
     """Update the user bio"""
     owner_id = str(user_id)
@@ -70,12 +70,12 @@ def update_bio_handler(user_id):
     owner.update(bio=bio)
     return redirect(url_for('user_profile', user_id=owner_id))
 
-@flask_app.route("/update_edu/<uuid:user_id>", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/update_edu/<uuid:user_id>", strict_slashes=False, methods=['GET'])
 def udpate_edu(user_id):
     """Render the template for updating the education info"""
     return render_template("update_edu.html", user_id=user_id)
 
-@flask_app.route("/update_edu_handler/<uuid:user_id>", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/update_edu_handler/<uuid:user_id>", strict_slashes=False, methods=['POST'])
 def update_edu_handler(user_id):
     """Update the user edu"""
     owner_id = str(user_id)

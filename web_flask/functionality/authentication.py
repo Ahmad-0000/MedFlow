@@ -5,13 +5,13 @@ from models.user import User
 from web_flask.app import flask_app, cache_id
 
 
-@flask_app.route("/register", methods=['GET'])
+@flask_app.route("/medflow/register", methods=['GET'])
 def register():
     """Render register page"""
     return render_template('register.html', cache_id=cache_id)
 
 
-@flask_app.route("/create_account", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/create_account", strict_slashes=False, methods=['POST'])
 def register_handler():
     """Create a new user account"""
     data = request.form
@@ -37,26 +37,26 @@ def register_handler():
     r.set_cookie("status", "in", max_age=108000)
     return r
 
-@flask_app.route("/delete", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/delete", strict_slashes=False, methods=['GET'])
 def delete():
     """Renders delete account page"""
     return render_template("delete_account.html")
 
 
-@flask_app.route("/logout", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/logout", strict_slashes=False, methods=['GET'])
 def logout():
     """Handles user loging out"""
     r = make_response(redirect(url_for("questions_page")))
     r.set_cookie("status", "", expires=0)
     return r
 
-@flask_app.route("/login_page", strict_slashes=False, methods=['GET'])
+@flask_app.route("/medflow/login_page", strict_slashes=False, methods=['GET'])
 def login_page():
     """Renders login page"""
     return render_template("login.html")
 
 
-@flask_app.route("/login", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/login", strict_slashes=False, methods=['POST'])
 def login():
     """Handle user loggin in"""
     data = request.form
@@ -72,7 +72,7 @@ def login():
     r.set_cookie("status", "in")
     return r
 
-@flask_app.route("/delete_account", strict_slashes=False, methods=['POST'])
+@flask_app.route("/medflow/delete_account", strict_slashes=False, methods=['POST'])
 def delete_account():
     """Deletes user account"""
     data = request.form
