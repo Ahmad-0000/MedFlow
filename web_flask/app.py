@@ -1,3 +1,6 @@
+"""
+Main app module
+"""
 from flask import Flask, make_response, request, redirect, render_template, abort, url_for
 from datetime import date
 from api.v1.views import app_views
@@ -10,10 +13,44 @@ from uuid import uuid4
 
 
 flask_app = Flask(__name__)
-
 cache_id = str(uuid4())
-
-
+errors = {
+    'err_authorization': {
+        'title': 'Unauthorized',
+        'message': "You don't own this resource",
+        'code': 401
+    },
+    'err_notfound': {
+        'title': 'Not found',
+        'message': "Not Found",
+        'code': 404
+    },
+    'err_registeration': {
+        'title': 'Not registered',
+        'message': "You are not registered",
+        'code': 403
+    },
+    'err_logging': {
+        'title': 'Not logged',
+        'message': "You are not logged in",
+        'code': 403
+    },
+    'err_userconflict': {
+        'title': 'Cookies issue',
+        'message': "Don't mess up with your cookies",
+        'code': 409
+    },
+    'err_taken': {
+        'title': 'Already taken',
+        'message': "The email or password has already been taken",
+        'code': 409
+    },
+    'err_future': {
+        'title': 'Future Date',
+        'message': "Welcome from the future, however, you are not allowed to register :)",
+        'code': 400
+    }
+}
 
 @flask_app.route("/medflow/about", strict_slashes=False, methods=['GET'])
 def about():
@@ -43,15 +80,15 @@ def is_authenticated(user, request):
     email = request.cookies.get("email", None)
     password = request.cookies.get("password", None)
     if not email or not password:
-        return (0, 0) # regfirst
+        return (False, 403, 'err_registeration')
     credentail_user = storage.check_user(email, password, "h")
     if not credentail_user:
-        return (0, 0)
+        return (False, 403, 'err_registeration')
     if user.to_dict() != credentail_user.to_dict():
-        return (0, 1) # userconflict
+        return (False, 409, 'err_userconflict')
     if status != "in":
-        return (0, 2) # logfirst
-    return True
+        return (False, 403, 'err_logging')
+    return (True, )
 
 def is_item_owner(item, user):
     """Check if the item <item> is owned by the user <user>"""
@@ -60,19 +97,40 @@ def is_item_owner(item, user):
     return False
 
 
+@flask_app.errorhandler(400)
+def future_date(error):
+    """Handle if the entered user birth date is from the future"""
+    return make_response(render_template('error.html', error=errors['err_future']), 400)
+
 @flask_app.errorhandler(401)
 def unauthorized(error):
     """Handles 401 error"""
-    return make_response(render_template("unauthorized.html"), 401)
+    return make_response(render_template("error.html", error=errors['err_authorization']), 401)
 
 @flask_app.errorhandler(404)
 def nf(error):
     """Handles 404 error"""
-    return make_response(render_template('nf.html'), 404)
+    return make_response(render_template('error.html', error=errors['err_notfound']), 404)
 
-from web_flask.functionality.profile import *
-from web_flask.functionality.authentication import *
-from web_flask.functionality.question_interaction import *
-from web_flask.functionality.question_comments import *
-from web_flask.functionality.answer_interaction import *
-from web_flask.functionality.answer_comments import *
+@flask_app.errorhandler(409)
+def cookies_taken_issues(error):
+    """
+    Handling requests with messed cookies, or if the email or password
+    are already taken
+    """
+    return make_response(render_template('error.html', error=errors[error.description]), 409)
+
+@flask_app.errorhandler(403)
+def logging_registering_issues(error):
+    """Handling requests without logging or registering"""
+    return make_response(render_template('error.html', error=errors[error.description]), 403)
+    
+
+if __name__ == "__main__":
+    from web_flask.functionality.profile import *
+    from web_flask.functionality.authentication import *
+    from web_flask.functionality.question_interaction import *
+    from web_flask.functionality.question_comments import *
+    from web_flask.functionality.answer_interaction import *
+    from web_flask.functionality.answer_comments import *
+    flask_app.run(host="0.0.0.0", port=5000, debug=True)
