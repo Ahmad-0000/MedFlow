@@ -4,37 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Answer</title>
+    <!-- External style -->
+    <link rel="stylesheet" href="../../static/style/global.css">
     <!-- Inline style -->
     <style>
-        /* Start Global Rules */
-        * {
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-        }
-
-        :root {
-            --main-color: #ff9800;
-        }
-
-        .container {
-            width: 700px;
-            margin: 0 auto;
-            padding: 100px 15px 15px 15px;
-            position: relative;
-        }
-
-        ::selection {
-            background-color: var(--main-color);
-            color: white;
-        }
-
-        /* End Global Rules */
-
         /* Start Main Section */
         form {
             position: absolute;
@@ -130,7 +103,7 @@
     </style>
 </head>
 <body>
-            <form action="http://web-01.ahmad-basheer.tech/medflow/update_answer_handler/{{answer_id}}" method="post">
+            <form action="http://localhost:5000/medflow/update_answer_handler/{{answer_id}}" method="post">
                 <label for="body">Content</label>
                 <textarea id="body" name="body" required maxlength="300"></textarea>
                 <input type="submit" value="Update">

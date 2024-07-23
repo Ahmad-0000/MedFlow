@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Comment</title>
+    <!-- Style Sheets -->
+    <link rel="stylesheet" href="../../static/style/global.css">
     <link rel="stylesheet" href="../../static/style/ask.css">
     <!-- Font Awesome Library -->
-    <link rel="stylesheet" href="../../static/style/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-            <form action="http://web-01.ahmad-basheer.tech/medflow/add_answer_comment_handler/{{a_id}}" method="post">
+            <form action="http://localhost:5000/medflow/add_answer_comment_handler/{{a_id}}" method="post">
                 <label for="body">Content</label>
                 <textarea id="body" name="body" required maxlength="300"></textarea>
                 <input type="submit" value="Comment">

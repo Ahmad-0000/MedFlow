@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Question</title>
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="../../static/style/global.css">
     <link rel="stylesheet" href="../../static/style/ask.css">
     <!-- Font Awesome Library -->
-    <link rel="stylesheet" href="../../static/style/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body>
-            <form action="http://web-01.ahmad-basheer.tech/medflow/update_question_handler/{{question.id}}" method="post">
+            <form action="http://localhost:5000/medflow/update_question_handler/{{question.id}}" method="post">
                 <label for="title">Title <span>100 characters maximum</span></label>
                 <input type="text" id="title" name="title" maxlength="100" value="{{question.title}}" required>
                 <label for="body">Content</label>

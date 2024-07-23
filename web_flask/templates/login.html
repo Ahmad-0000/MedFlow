@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <!-- Style sheets -->
+    <link rel="stylesheet" href="../../static/style/global.css">
     <link rel="stylesheet" href="../../static/style/login.css">
 </head>
 <body>
-    <form action="http://web-01.ahmad-basheer.tech/medflow/login" method="post">
+    <form action="http://localhost:5000/medflow/login" method="post">
         <div class="logo">
             MedFlow
         </div>
@@ -21,7 +23,7 @@
                 <input id="pawd" type="password" maxlength="8" required name="password">
             </label>
             <input type="submit" value="Log In" id="log">
-            <a href="http://web-01.ahmad-basheer.tech/medflow/register">No account ? <span>Register now</span></a>
+            <a href="http://localhost:5000/medflow/register">No account ? <span>Register now</span></a>
         </div>
     </form>
 </body>
