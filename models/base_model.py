@@ -10,6 +10,7 @@ from hashlib import md5
 
 Base = declarative_base()
 
+
 class BaseModel():
     """Base Model that other models will inherit from"""
 
@@ -45,7 +46,8 @@ class BaseModel():
                 self.updated_at = datetime.utcnow()
 
     def __str__(self):
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def update(self, *args, **kwargs):
         """Update the current object"""

@@ -25,26 +25,28 @@ class Storage():
         pwd = getenv('MEDFLOW_USER_PASSWD')
         host = getenv('MEDFLOW_DB_HOST')
         db = getenv('MEDFLOW_DB')
-        Storage.__engine = create_engine('mysql+mysqldb://{}:{}@{}:3306/{}'.\
-                           format(user, pwd, host, db), pool_pre_ping=True)
+        url = 'mysql+mysqldb://{}:{}@{}:3306/{}'.format(user, pwd, host, db)
+        Storage.__engine = create_engine(url, pool_pre_ping=True)
         Base.metadata.create_all(Storage.__engine)
 
     def reload(self):
         """Reload objects from the datebase"""
         Session = scoped_session(sessionmaker(bind=Storage.__engine,
-                                           expire_on_commit=False))
+                                              expire_on_commit=False))
         Storage.__session = Session()
 
     def all(self, cls_list):
         """Retrieve all instances on all classes of cls_list from db"""
         all_obj = {}
         for cls in cls_list:
-            all_obj[cls.__name__.lower() + "s"] = Storage.__session.query(cls).all()
+            all_obj[cls.__name__.lower() + "s"] = Storage.__session.\
+                                                  query(cls).all()
         return all_obj
 
     def some(self, cls, index):
         """Get 5 instances of cls based on after"""
-        all_obj = Storage.__session.query(cls).order_by(text("created_at DESC")).all()
+        all_obj = Storage.__session.query(cls).\
+            order_by(text("created_at DESC")).all()
         some = []
         if len(all_obj) - 1 < index:
             return some
@@ -89,10 +91,12 @@ class Storage():
             m = md5()
             m.update(bpassword)
             password = m.hexdigest()
-        user = Storage.__session.query(User).filter_by(email=email).one_or_none()
+        user = Storage.__session.query(User).filter_by(email=email).\
+            one_or_none()
         if user:
             return user
-        user = Storage.__session.query(User).filter_by(password=password).one_or_none()
+        user = Storage.__session.query(User).filter_by(password=password).\
+            one_or_none()
         if user:
             return user
         return False
@@ -100,6 +104,7 @@ class Storage():
     def question_fts(self, sentence):
         """Perform fts against questions table using <sentence>"""
         return Storage.__session.query(Question).\
-                from_statement(
-                text('SELECT * FROM questions WHERE MATCH (title, body) AGAINST (":sentence")'))\
-                .params(sentence=sentence).all()
+            from_statement(
+            text('''SELECT * FROM questions
+                 WHERE MATCH (title, body) AGAINST (":sentence")'''))\
+            .params(sentence=sentence).all()

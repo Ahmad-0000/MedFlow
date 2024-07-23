@@ -6,6 +6,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Text, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
+
 class Question(BaseModel, Base):
     """Main question model"""
     __tablename__ = "questions"
