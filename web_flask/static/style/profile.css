@@ -1,71 +1,4 @@
-/* Start Global Rules */
-
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-}
-
-:root {
-    --main-color: #ff9800;
-}
-
-a {
-    text-decoration: none;
-    color: #575757;
-}
-
-a:hover {
-    color: var(--main-color);
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-.container {
-    width: 700px;
-    margin: 0 auto;
-    padding: 100px 15px 15px 15px;
-    position: relative;
-}
-
-::selection {
-    background-color: var(--main-color);
-    color: white;
-}
-
-@media (max-width: 767px) {
-    .container {
-        padding-top: 10px;
-        width: 350px;
-        margin: 0 auto;
-    }
-
-}
-
-@media (min-width: 991px) {
-    .container {
-        width: 700px;
-        margin: 0 auto;
-    }
-}
-
-@media (min-width: 1199px) {
-    .container {
-        width: 800px;
-        margin: 0 auto;
-    }
-}
-
-/* End Global Rules */
-
 /* Start Main */
-
 .container .user-info {
     display: flex;
     flex-wrap: wrap;
@@ -75,6 +8,7 @@ html {
 }
 
 .container .user-info .id {
+    color: var(--main-color);
     position: absolute;
     top: -20px;
     font-size: 18px;
@@ -82,7 +16,9 @@ html {
 
 @media (max-width: 767px) {
     .container .user-info .id {
-        font-size: 10px;
+        top: -20px;
+        left: 0px;
+        font-size: 12px;
     }
 }
 
@@ -109,12 +45,6 @@ html {
         padding-top: 35px;
     }
 
-    .container .user-info .id {
-        top: -20px;
-        left: 50px;
-        font-size: 14px;
-    }
-
     .container .user-info .bio {
         font-size: 14px;
     }
@@ -130,10 +60,6 @@ html {
 .container .user-info .info {
     width: 55%;
     font-size: 18px;
-}
-
-.container .user-info .id {
-    color: var(--main-color);
 }
 
 .container .user-info .info p {
