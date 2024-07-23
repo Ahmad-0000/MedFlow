@@ -1,32 +1,3 @@
-/* Start Global Rules */
-* {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-}
-
-:root {
-    --main-color: #ff9800;
-}
-
-.container {
-    width: 700px;
-    margin: 0 auto;
-    padding: 100px 15px 15px 15px;
-    position: relative;
-}
-
-::selection {
-    background-color: var(--main-color);
-    color: white;
-}
-
-/* End Global Rules */
-
 /* Start Main Section */
 form {
     position: absolute;
@@ -119,4 +90,3 @@ input[type='submit']:hover {
     }
 }
 /* End Main Section */
-
