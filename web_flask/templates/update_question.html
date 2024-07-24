@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../static/style/ask.css?{{cache_id}}">
 </head>
 <body>
-            <form action="http://localhost:5000/medflow/update_question_handler/{{question.id}}" method="post">
+            <form action="http://web-01.ahmad-basheer.tech:5000/medflow/update_question_handler/{{question.id}}" method="post">
                 <label for="title">Title <span>100 characters maximum</span></label>
                 <input type="text" id="title" name="title" maxlength="100" value="{{question.title}}">
                 <label for="body">Content</label>
