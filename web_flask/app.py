@@ -132,11 +132,9 @@ def refresh(exception):
     """Renewing the database session after each serve"""
     storage.close()
 
-if __name__ == "__main__":
-    from web_flask.functionality.profile import *
-    from web_flask.functionality.authentication import *
-    from web_flask.functionality.question_interaction import *
-    from web_flask.functionality.question_comments import *
-    from web_flask.functionality.answer_interaction import *
-    from web_flask.functionality.answer_comments import *
-    flask_app.run(host="0.0.0.0", port=5000, debug=True)
+from web_flask.functionality.profile import *
+from web_flask.functionality.authentication import *
+from web_flask.functionality.question_interaction import *
+from web_flask.functionality.question_comments import *
+from web_flask.functionality.answer_interaction import *
+from web_flask.functionality.answer_comments import *
