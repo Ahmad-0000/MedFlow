@@ -5,6 +5,7 @@ from flask import jsonify, abort, request, make_response
 from api.v1.views import app_views
 from models import storage
 from models.answer import Answer
+from models.question import Question
 
 
 @app_views.route("/answers/<uuid:answer_id>", strict_slashes=False)
@@ -48,12 +49,45 @@ def new_answer():
     if not request.is_json:
         abort(400, "Not a JSON")
     data = request.get_json()
-    if "body" not in data or "question_id" not in data or "user_id" not in data:
+    question_id = data.get('question_id', None)
+    email = data.get("email", None)
+    password = data.get("password", None)
+    body = data.get("body", None)
+    if not email or not password or not body or not question_id:
         abort(400, "Missing data")
-    answer = Answer(**data)
+    question = storage.get(Question, question_id)
+    if not question:
+        abort(404)
+    credential_user = storage.credential_user(email, password)
+    if not credential_user:
+        abort(400, "Wrong credentials")
+    answer = Answer(user_id=credential_user.id, question_id=question.id, body=body)
     storage.add(answer)
     storage.save()
     return make_response(jsonify(answer.to_dict()), 201)
+
+@app_views.route("/answers/<uuid:answer_id>", strict_slashes=False, methods=['PUT'])
+def update_answer(answer_id):
+    """Update answer with id <answer_id>"""
+    answer_id = str(answer_id)
+    answer = storage.get(Answer, answer_id)
+    if not answer:
+        abort(404)
+    if not request.is_json:
+        abort(400, "Not a JSON")
+    data = request.get_json()
+    email = data.get("email", None)
+    password = data.get("password", None)
+    body = data.get("body", None)
+    if not email or not password or not body:
+        abort(400, "Missing data")
+    credential_user = storage.credential_user(email, password)
+    if not credential_user:
+        abort(400, "Wrong credentials")
+    if credential_user.id != answer.user_id:
+        abort(401)
+    answer.update(body=body)
+    return make_response(jsonify(answer.to_dict()), 200)
 
 @app_views.route("/answers/<uuid:answer_id>", strict_slashes=False, methods=['DELETE'])
 def delete_answer(answer_id):
@@ -62,25 +96,17 @@ def delete_answer(answer_id):
     answer = storage.get(Answer, answer_id)
     if not answer:
         abort(404)
-    storage.delete(answer)
-    return make_response(jsonify({}), 200)
-
-@app_views.route("/answers/<uuid:answer_id>", strict_slashes=False, methods=['PUT'])
-def update_answer(answer_id):
-    """Update answer with id <answer_id>"""
     if not request.is_json:
         abort(400, "Not a JSON")
-    answer_id = str(answer_id)
-    answer = storage.get(Answer, answer_id)
-    if not answer:
-        abort(404)
-    allowed = ["body", "votes"]
     data = request.get_json()
-    filtered_data = {}
-    for k, v in data.items():
-        if k not in allowed:
-            pass
-        else:
-            filtered_data[k] = v
-    answer.update(**filtered_data)
-    return make_response(jsonify(answer.to_dict()), 200)
+    email = data.get("email", None)
+    password = data.get("password", None)
+    if not email or not password:
+        abort(400, "Missing credentials")
+    credential_user = storage.credential_user(email, password)
+    if not credential_user:
+        abort(400, "Wrong credentials")
+    if credential_user.id != answer.user_id:
+        abort(401)
+    storage.delete(answer)
+    return make_response(jsonify({}), 200)
