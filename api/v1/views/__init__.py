@@ -11,13 +11,13 @@ from models.comments import AnsComment, QueComment
 
 app_views = Blueprint("app_views", __name__)
 
-@app_views.route("/status", strict_slashes=False)
+@app_views.route("/status", strict_slashes=False, methods=['GET'])
 def api_status():
     """Return api status"""
     return jsonify({"status": "OK"})
 
 
-@app_views.route("/stats", strict_slashes=False)
+@app_views.route("/stats", strict_slashes=False, methods=['GET'])
 def api_stats():
     """Return stats about the website"""
     stats = {
@@ -30,7 +30,10 @@ def api_stats():
     return jsonify(stats)
 
 def paginate(items, limit, index):
-    """"""
+    """
+    Paginate through <items> starting from <index> (included) and return
+    <limit> items if any
+    """
     some = []
     if len(items) - 1 < index:
         return some
