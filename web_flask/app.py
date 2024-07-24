@@ -64,7 +64,7 @@ def terms():
     """Renders terms of service page"""
     status = request.cookies.get("status", None)
     user_id = request.cookies.get("id", None)
-    return render_template("terms.html", status=status, user_id=user_id)
+    return render_template("terms.html", status=status, user_id=user_id, cache_id=cache_id)
 
 @flask_app.route("/medflow/privacy", strict_slashes=False, methods=['GET'])
 def privacy():
@@ -81,7 +81,7 @@ def is_authenticated(user, request):
     password = request.cookies.get("password", None)
     if not email or not password:
         return (False, 403, 'err_registeration')
-    credentail_user = storage.check_user(email, password, "h")
+    credentail_user = storage.credentail_user(email, password, "h")
     if not credentail_user:
         return (False, 403, 'err_registeration')
     if user.to_dict() != credentail_user.to_dict():
@@ -100,17 +100,17 @@ def is_item_owner(item, user):
 @flask_app.errorhandler(400)
 def future_date(error):
     """Handle if the entered user birth date is from the future"""
-    return make_response(render_template('error.html', error=errors['err_future']), 400)
+    return make_response(render_template('error.html', error=errors['err_future'], cache_id=cache_id), 400)
 
 @flask_app.errorhandler(401)
 def unauthorized(error):
     """Handles 401 error"""
-    return make_response(render_template("error.html", error=errors['err_authorization']), 401)
+    return make_response(render_template("error.html", error=errors['err_authorization'], cache_id=cache_id), 401)
 
 @flask_app.errorhandler(404)
 def nf(error):
     """Handles 404 error"""
-    return make_response(render_template('error.html', error=errors['err_notfound']), 404)
+    return make_response(render_template('error.html', error=errors['err_notfound'], cache_id=cache_id), 404)
 
 @flask_app.errorhandler(409)
 def cookies_taken_issues(error):
@@ -118,13 +118,18 @@ def cookies_taken_issues(error):
     Handling requests with messed cookies, or if the email or password
     are already taken
     """
-    return make_response(render_template('error.html', error=errors[error.description]), 409)
+    return make_response(render_template('error.html', error=errors[error.description], cache_id=cache_id), 409)
 
 @flask_app.errorhandler(403)
 def logging_registering_issues(error):
     """Handling requests without logging or registering"""
-    return make_response(render_template('error.html', error=errors[error.description]), 403)
-    
+    return make_response(render_template('error.html', error=errors[error.description], cache_id=cache_id), 403)
+
+
+@flask_app.teardown_appcontext
+def refresh(exception):
+    """Renewing the database session after each serve"""
+    storage.close()
 
 if __name__ == "__main__":
     from web_flask.functionality.profile import *
