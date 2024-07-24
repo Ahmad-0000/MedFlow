@@ -10,6 +10,7 @@ $(function () {
     const search = $("#fts");
     let searchContext = false;
 
+    // Conudct a full text search
     search.on('click', function () {
         searchSentence = $("#fts-sentence").val();
         searchContext = true;
@@ -18,12 +19,12 @@ $(function () {
         } else {
             const searchData = JSON.stringify({sentence: searchSentence, index: 0});
             $.ajax({
-                url: `http://web-01.ahmad-basheer.tech/api/v1/questions_fts`,
+                url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/questions_fts`,
                 type: 'POST',
                 data: searchData,
                 contentType: 'application/json',
                 success: function (questions) {
-                        if (questions.length > 0) {
+                        if (questions.length > 0) { // there is a search result
                             questionsContainer.css("text-align", "left");
                             more = $("#more");
                             if (questions.length > 4) {
@@ -41,13 +42,13 @@ $(function () {
                                         - Updated at <span class="updated_at">${q.updated_at.replace("T", " ") + " UTC"}</span>
                                     </p>
                                 </div>`)
-                                $.ajax({
-                                    url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
+                                $.ajax({ // Populating the user name part of the question
+                                    url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/users/${q.user_id}`,
                                     type: 'GET',
                                     success: function (user) {
                                         const userLink = $(`.${q.user_id}-user-link`);
                                         userLink.text(user.first_name + " " + user.last_name);
-                                        userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
+                                        userLink.attr("href", `http://web-01.ahmad-basheer.tech:5000/medflow/users/${user.id}`)
                                     }
                                 });
                             }
@@ -62,8 +63,9 @@ $(function () {
         }
     })
 
+    // Populates main question page (With no search)
     $.ajax({
-        url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${regularIndex}`,
+        url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/questions/${regularIndex}`,
         type: 'GET',
         success: function (questions) {
             if (questions.length > 0) {
@@ -77,22 +79,23 @@ $(function () {
                             </p>
                         </div>`)
                         $.ajax({
-                            url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
+                            url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/users/${q.user_id}`,
                             type: 'GET',
-                            success: function (user) {
+                            success: function (user) { // Populate user name part of the question
                                 const userLink = $(`.${q.user_id}-user-link`);
                                 userLink.text(user.first_name + " " + user.last_name);
-                                userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
+                                userLink.attr("href", `http://web-01.ahmad-basheer.tech:5000/medflow/users/${user.id}`)
                             }
                         });
                 }
                 container.append('<span id="more">More ...</span>')
                 more = $("#more");
+                // Fetch more 5 questions from the api if any
                 more.on('click', function () {
-                    if (!searchContext) {
+                    if (!searchContext) { // Bring arbitrary questions
                         regularIndex += 5;
                         $.ajax({
-                            url: `http://web-01.ahmad-basheer.tech/api/v1/questions/${regularIndex}`,
+                            url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/questions/${regularIndex}`,
                             type: 'GET',
                             success: function (questions) {
                                 if (questions.length > 0) {
@@ -106,12 +109,12 @@ $(function () {
                                                 </p>
                                             </div>`)
                                         $.ajax({
-                                            url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
+                                            url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/users/${q.user_id}`,
                                             type: 'GET',
                                             success: function (user) {
                                                 const userLink = $(`.${q.user_id}-user-link`);
                                                 userLink.text(user.first_name + " " + user.last_name);
-                                                userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
+                                                userLink.attr("href", `http://web-01.ahmad-basheer.tech:5000/medflow/users/${user.id}`)
                                             }
                                         })
                                     }
@@ -120,7 +123,7 @@ $(function () {
                             }
                         }
                     })
-                    } else {
+                    } else { // Conduct a full text search
                         if ($("fts-sentence").val() === "") {
                             searchContext = false;
                             searchIndex = 0;
@@ -128,7 +131,7 @@ $(function () {
                         searchIndex += 5;
                         const searchData = JSON.stringify({sentence: searchSentence, index: searchIndex});
                         $.ajax({
-                            url: `http://web-01.ahmad-basheer.tech/api/v1/questions_fts`,
+                            url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/questions_fts`,
                             type: 'POST',
                             data: searchData,
                             contentType: 'application/json',
@@ -144,13 +147,13 @@ $(function () {
                                                     - Updated at <span class="updated_at">${q.updated_at.replace("T", " ") + " UTC"}</span>
                                                 </p>
                                             </div>`)
-                                            $.ajax({
-                                                url: `http://web-01.ahmad-basheer.tech/api/v1/users/${q.user_id}`,
+                                            $.ajax({ // Populates user name part of the question
+                                                url: `http://web-01.ahmad-basheer.tech:8080/medflow/api/v1/users/${q.user_id}`,
                                                 type: 'GET',
                                                 success: function (user) {
                                                     const userLink = $(`.${q.user_id}-user-link`);
                                                     userLink.text(user.first_name + " " + user.last_name);
-                                                    userLink.attr("href", `http://web-01.ahmad-basheer.tech/medflow/users/${user.id}`)
+                                                    userLink.attr("href", `http://web-01.ahmad-basheer.tech:5000/medflow/users/${user.id}`)
                                                 }
                                             });
                                         }
