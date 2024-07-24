@@ -9,14 +9,14 @@ from web_flask.app import flask_app, cache_id, is_authenticated, is_item_owner, 
 
 
 
-@flask_app.route("/medflow/questions/<uuid:question_id>", strict_slashes=False)
+@flask_app.route("/medflow/questions/<uuid:question_id>", strict_slashes=False, methods=['GET'])
 def get_question(question_id):
     """Render the page of the question with id <question_id>"""
     question_id = str(question_id)
     status = request.cookies.get("status", None)
     user_id = request.cookies.get("id", None)
-    q = storage.get(Question, question_id)
-    if not q:
+    question = storage.get(Question, question_id)
+    if not question:
         abort(404)
     return render_template('question.html', id=question_id, cache_id=cache_id, status=status, user_id=user_id)
 
@@ -31,7 +31,7 @@ def questions_page():
 @flask_app.route("/medflow/ask", strict_slashes=False, methods=['GET'])
 def new_question():
     """Render asking template"""
-    return render_template('ask.html')
+    return render_template('ask.html', cache_id=cache_id)
 
 @flask_app.route('/medflow/create_question', strict_slashes=False, methods=['POST'])
 def create_question():
@@ -58,7 +58,7 @@ def update_question(question_id):
     question = storage.get(Question, question_id)
     if not question:
         abort(404)
-    return render_template("update_question.html", question=question)
+    return render_template("update_question.html", question=question, cache_id=cache_id)
 
 
 @flask_app.route("/medflow/update_question_handler/<uuid:question_id>", methods=['POST'], strict_slashes=False)
@@ -95,8 +95,8 @@ def update_question_handler(question_id):
 def delete_question(q_id):
     """Delete question with id <q_id>"""
     q_id = str(q_id)
-    q = storage.get(Question, q_id)
-    if not q:
+    question = storage.get(Question, q_id)
+    if not question:
         abort(404)
     user_id = request.cookies.get("id", None)
     if not user_id:
@@ -106,8 +106,8 @@ def delete_question(q_id):
         abort(403, 'err_registeration')
     auth_status = is_authenticated(id_user, request)
     if auth_status[0]:
-        if is_item_owner(q, id_user):
-            storage.delete(q)
+        if is_item_owner(question, id_user):
+            storage.delete(question)
             return redirect(url_for('questions_page'))
         abort(401)
     abort(auth_status[1], auth_status[2])

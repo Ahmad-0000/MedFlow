@@ -12,14 +12,14 @@ from web_flask.app import flask_app, cache_id, is_authenticated, is_item_owner
 def answer(q_id):
     """Render the template answer.html"""
     q_id = str(q_id)
-    return render_template("answer.html", q_id=q_id)
+    return render_template("answer.html", q_id=q_id, cache_id=cache_id)
 
 @flask_app.route("/medflow/answer_question/<uuid:q_id>", strict_slashes=False, methods=['POST'])
 def answer_question_handler(q_id):
     """Adds a question answer"""
     q_id = str(q_id)
-    q = storage.get(Question, q_id)
-    if not q:
+    question = storage.get(Question, q_id)
+    if not question:
         abort(404)
     user_id = request.cookies.get("id", None)
     if not user_id:
@@ -39,7 +39,7 @@ def answer_question_handler(q_id):
 @flask_app.route("/medflow/update_answer/<uuid:answer_id>", strict_slashes=False, methods=['GET'])
 def update_answer(answer_id):
     """Render the template update_answer.html"""
-    return render_template('update_answer.html', answer_id=answer_id)
+    return render_template('update_answer.html', answer_id=answer_id, cache_id=cache_id)
 
 @flask_app.route("/medflow/update_answer_handler/<uuid:a_id>", strict_slashes=False, methods=['POST'])
 def update_answer_handler(a_id):
@@ -58,8 +58,7 @@ def update_answer_handler(a_id):
     if auth_status[0]:
         if is_item_owner(answer, id_user):
             body = request.form.get("body", {})
-            if body:
-                answer.update(body=body)
+            answer.update(body=body)
             return redirect(url_for('get_question', question_id=answer.question_id))
         abort(401)
     abort(auth_status[1], auth_status[2])
