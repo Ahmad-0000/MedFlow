@@ -54,7 +54,14 @@ class BaseModel():
         from models import storage
         if kwargs:
             for k, v in kwargs.items():
-                setattr(self, k, v)
+                if k != "password":
+                    setattr(self, k, v)
+                else:
+                    bpassword = v.encode()
+                    m = md5()
+                    m.update(bpassword)
+                    password = m.hexdigest()
+                    setattr(self, k, password)
             self.updated_at = datetime.utcnow()
             storage.save()
 
