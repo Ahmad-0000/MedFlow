@@ -8,7 +8,7 @@ from models.answer import Answer
 from models.question import Question
 
 
-@app_views.route("/answers/<uuid:answer_id>", strict_slashes=False)
+@app_views.route("/answers/<uuid:answer_id>", strict_slashes=False, methods=['GET'])
 def get_answer(answer_id):
     """Get the answer with id <answer_id>"""
     answer_id = str(answer_id)
@@ -18,7 +18,7 @@ def get_answer(answer_id):
     return jsonify(answer.to_dict())
 
 
-@app_views.route("/answers/<uuid:question_id>/<int:index>", strict_slashes=False)
+@app_views.route("/answers/<uuid:question_id>/<int:index>", strict_slashes=False, methods=['GET'])
 def get_some_answers(question_id, index):
     """
     Get the answers 5 answers starting from index <index> (included)
@@ -30,7 +30,7 @@ def get_some_answers(question_id, index):
         answers_repr.append(ans.to_dict())
     return jsonify(answers_repr)
 
-@app_views.route("/answers/<uuid:answer_id>/comments", strict_slashes=False)
+@app_views.route("/answers/<uuid:answer_id>/comments", strict_slashes=False, methods=['GET'])
 def get_answer_comments(answer_id):
     """Get comments of the answer with id <answer_id>"""
     answer_id = str(answer_id)

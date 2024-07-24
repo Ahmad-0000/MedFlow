@@ -7,7 +7,7 @@ from models import storage
 from models.question import Question
 
 
-@app_views.route("/questions/<int:index>")
+@app_views.route("/questions/<int:index>", strict_slashes=False, methods=['GET'])
 def some_questions(index):
     """
     Get 5 questions from the database starting from index <index>
@@ -19,7 +19,7 @@ def some_questions(index):
         questions_repr.append(q.to_dict())
     return jsonify(questions_repr)
 
-@app_views.route("/questions/<uuid:question_id>", strict_slashes=False)
+@app_views.route("/questions/<uuid:question_id>", strict_slashes=False, methods=['GET'])
 def get_question(question_id):
     """Get one question based on <question_id>"""
     question_id = str(question_id)
@@ -29,7 +29,7 @@ def get_question(question_id):
     return jsonify(question.to_dict())
 
 
-@app_views.route("/questions/<uuid:question_id>/comments", strict_slashes=False)
+@app_views.route("/questions/<uuid:question_id>/comments", strict_slashes=False, methods=['GET'])
 def get_question_comments(question_id):
     """Get all question comments of the question with id <question_id>"""
     question_id = str(question_id)
@@ -43,7 +43,7 @@ def get_question_comments(question_id):
     return jsonify(comments_repr)
 
 
-@app_views.route("/questions/<uuid:question_id>/answers", strict_slashes=False)
+@app_views.route("/questions/<uuid:question_id>/answers", strict_slashes=False, methods=['GET'])
 def get_question_answers(question_id):
     """Get all question answers of the question with id <question_id>"""
     question_id = str(question_id)

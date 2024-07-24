@@ -8,7 +8,7 @@ from models import storage
 from models.user import User
 
 
-@app_views.route("/users/<uuid:user_id>", strict_slashes=False)
+@app_views.route("/users/<uuid:user_id>", strict_slashes=False, methods=['GET'])
 def get_user(user_id):
     """Get user info"""
     user_id = str(user_id)
@@ -100,7 +100,7 @@ def update_user(user_id):
     abort(400, "Missing data")
 
 
-@app_views.route("/users/<uuid:user_id>/questions", strict_slashes=False)
+@app_views.route("/users/<uuid:user_id>/questions", strict_slashes=False, methods=['GET'])
 def get_user_questions(user_id):
     """Get user questions"""
     user_id = str(user_id)
@@ -113,7 +113,7 @@ def get_user_questions(user_id):
         questions_repr.append(question.to_dict())
     return jsonify(questions_repr)
 
-@app_views.route("/users/<uuid:user_id>/questions/<int:index>", strict_slashes=False)
+@app_views.route("/users/<uuid:user_id>/questions/<int:index>", strict_slashes=False, methods=['GET'])
 def get_some_user_questions(user_id, index):
     """Get some user questions starting from <index> (included)"""
     user_id = str(user_id)
@@ -128,7 +128,7 @@ def get_some_user_questions(user_id, index):
     return jsonify(some)
 
 
-@app_views.route("/users/<uuid:user_id>/answers", strict_slashes=False)
+@app_views.route("/users/<uuid:user_id>/answers", strict_slashes=False, methods=['GET'])
 def get_user_answers(user_id):
     """Get user answers"""
     user_id = str(user_id)
@@ -141,7 +141,7 @@ def get_user_answers(user_id):
         answers_repr.append(answer.to_dict())
     return jsonify(answers_repr)
 
-@app_views.route("/users/<uuid:user_id>/answers/<int:index>", strict_slashes=False)
+@app_views.route("/users/<uuid:user_id>/answers/<int:index>", strict_slashes=False, methods=['GET'])
 def get_some_user_answers(user_id, index):
     """Get some user answers"""
     user_id = str(user_id)
