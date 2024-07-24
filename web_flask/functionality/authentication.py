@@ -9,7 +9,7 @@ from models.user import User
 from web_flask.app import flask_app, cache_id
 
 
-@flask_app.route("/medflow/register", methods=['GET'])
+@flask_app.route("/medflow/register", methods=['GET'], strict_slashes=False)
 def register():
     """Render register page"""
     return render_template('register.html', cache_id=cache_id)
@@ -47,12 +47,12 @@ def register_handler():
 @flask_app.route("/medflow/delete", strict_slashes=False, methods=['GET'])
 def delete():
     """Renders delete account page"""
-    return render_template("delete_account.html")
+    return render_template("delete_account.html", cache_id=cache_id)
 
 
 @flask_app.route("/medflow/logout", strict_slashes=False, methods=['GET'])
 def logout():
-    """Handles user logging out"""
+    """Handles user's logging out"""
     r = make_response(redirect(url_for("questions_page")))
     r.set_cookie("status", "", expires=0)
     return r
@@ -61,18 +61,16 @@ def logout():
 @flask_app.route("/medflow/login_page", strict_slashes=False, methods=['GET'])
 def login_page():
     """Renders login page"""
-    return render_template("login.html")
+    return render_template("login.html", cache_id=cache_id)
 
 
 @flask_app.route("/medflow/login", strict_slashes=False, methods=['POST'])
 def login():
-    """Handle user loggin in"""
+    """Handle user's logging in"""
     data = request.form
-    user = storage.check_user(data['email'], data['password'])
+    user = storage.credential_user(data['email'], data['password'])
     if not user:
         abort(404)
-    ans = len(user.answers)
-    qu = len(user.questions)
     r = make_response(redirect(url_for('user_profile', user_id=user.id)), 200)
     r.set_cookie("id", user.id, max_age=108000)
     r.set_cookie("email", user.email, max_age=108000)
@@ -84,9 +82,9 @@ def login():
 @flask_app.route("/medflow/delete_account", strict_slashes=False,
                  methods=['POST'])
 def delete_account():
-    """Deletes user account"""
+    """Deletes user's account"""
     data = request.form
-    user = storage.check_user(data['email'], data['password'])
+    user = storage.credential_user(data['email'], data['password'])
     if not user:
         abort(404)
     storage.delete(user)
