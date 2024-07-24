@@ -61,15 +61,54 @@ def get_question_answers(question_id):
 def new_question():
     """Create a new question"""
     if not request.is_json:
-        abort(404, "Not a JSON")
+        abort(400, "Not a JSON")
     data = request.get_json()
-    if "user_id" not in data or "title" not in data or "body" not in data:
+    email = data.get("email", None)
+    password = data.get("password", None)
+    title = data.get("title", None)
+    body = data.get("body", None)
+    if not email or not password or not title or not body:
         abort(400, "Missing data")
-    question = Question(user_id=data['user_id'], title=data["title"],
-                        body=data["body"], votes=0)
+    user = storage.credential_user(email, password)
+    if not user:
+        abort(400, "Wrong credentials")
+    question = Question(user_id=user.id, title=title, body=body)
     storage.add(question)
     storage.save()
     return make_response(jsonify(question.to_dict()), 201)
+
+@app_views.route("/questions/<uuid:question_id>", strict_slashes=False, methods=["PUT"])
+def update_question(question_id):
+    """Update question with the id <question_id>"""
+    question_id = str(question_id)
+    question = storage.get(Question, question_id)
+    if not question:
+        abort(404)
+    if not request.is_json:
+        abort(400, "Not a JSON")
+    data = request.get_json()
+    email = data.get("email", None)
+    password = data.get("password", None)
+    title = data.get("title", None)
+    body = data.get("body", None)
+    if not email or not password:
+        abort(400, "Missing credentials")
+    credential_user = storage.credential_user(email, password)
+    if not credential_user:
+        abort(400, "Wrong credentials")
+    if credential_user.id != question.user_id:
+        abort(401)
+    if title or body:
+        allowed = ["title", "body"]
+        filtered_data = {}
+        for k, v in data.items():
+            if k not in allowed:
+                pass
+            else:
+                filtered_data[k] = v
+        question.update(**filtered_data)
+        return make_response(jsonify(question.to_dict()), 200)
+    abort(400, "Missing data")
 
 @app_views.route("/questions/<uuid:question_id>", strict_slashes=False, methods=["DELETE"])
 def remove_question(question_id):
@@ -78,35 +117,26 @@ def remove_question(question_id):
     question = storage.get(Question, question_id)
     if not question:
         abort(404)
-    storage.delete(question)
-    return make_response(jsonify({}), 200)
-
-@app_views.route("/questions/<uuid:question_id>", strict_slashes=False, methods=["PUT"])
-def update_question(question_id):
-    """Update question with the id <question_id>"""
     if not request.is_json:
         abort(400, "Not a JSON")
-    question_id = str(question_id)
-    question = storage.get(Question, question_id)
-    if not question:
-        abort(404)
     data = request.get_json()
-    allowed = ["title", "body", "votes"]
-    filtered_data = {}
-    for k, v in data.items():
-        if k not in allowed:
-            pass
-        else:
-            filtered_data[k] = v
-    question.update(**filtered_data)
-    return make_response(jsonify(question.to_dict()), 200)
+    email = data.get('email', None)
+    password = data.get('password', None)
+    if not email or not password:
+        abort(400, "Missing credentials")
+    credential_user = storage.credential_user(email, password)
+    if not credential_user:
+        abort(400, "Wrong credentials")
+    if credential_user.id != question.user_id:
+        abort(401)
+    storage.delete(question)
+    return make_response(jsonify({}), 200)
 
 
 @app_views.route("/questions_fts", methods=['POST'], strict_slashes=False)
 def questions_fts():
     """Conduct a full text on "questions" table"""
     if not request.is_json:
-        print("Here")
         abort(400, "Not a JSON")
     data = request.get_json()
     if 'sentence' not in data:
