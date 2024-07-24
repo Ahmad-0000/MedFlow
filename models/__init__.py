@@ -1,9 +1,7 @@
-#!/usr/bin/python3
 """
-Initializing the module
+Initializing "models" module
 """
-
 from models.engine.storage import Storage
 
 storage = Storage()
-storage.reload()
+storage.reload() # Reload objects from the database

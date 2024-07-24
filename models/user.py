@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 Contains main users model
 """
@@ -8,6 +7,7 @@ from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
+    """Represents user's account"""
     __tablename__ = "users"
     first_name = Column(String(20), nullable=False)
     last_name = Column(String(20), nullable=False)

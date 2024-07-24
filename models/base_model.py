@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 Contains the base model that other models will inherit from
 """
@@ -13,13 +12,12 @@ Base = declarative_base()
 
 class BaseModel():
     """Base Model that other models will inherit from"""
-
     id = Column(String(40), primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
 
     def __init__(self, *args, **kwargs):
-        """Initialize the object"""
+        """Initialize 'BaseModel' object"""
         if not kwargs:
             self.id = str(uuid4())
             self.created_at = datetime.utcnow()
@@ -29,7 +27,7 @@ class BaseModel():
                 if k != "__class__":
                     if k == "created_at" or k == "updated_at":
                         self.__dict__[k] = datetime.fromisoformat(v)
-                    if k == "password":
+                    if k == "password": # Creating a hashed function
                         m = md5()
                         passwd = kwargs[k]
                         passwd = passwd.encode()
@@ -46,6 +44,7 @@ class BaseModel():
                 self.updated_at = datetime.utcnow()
 
     def __str__(self):
+        """Returns a custom string representation for an object"""
         return "[{}] ({}) {}".format(self.__class__.__name__,
                                      self.id, self.__dict__)
 
@@ -66,7 +65,7 @@ class BaseModel():
             storage.save()
 
     def to_dict(self):
-        """Make dict representation of an object"""
+        """Makes a dict representation of an object"""
         dict_repr = {}
         for k, v in self.__dict__.items():
             if k == 'created_at' or k == 'updated_at':

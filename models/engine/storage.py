@@ -1,6 +1,5 @@
-#!/usr/bin/python3
 """
-Contains main class to manage storage
+Contains a class to manage storage
 """
 from os import getenv
 from hashlib import md5
@@ -14,8 +13,7 @@ from models.base_model import Base
 
 
 class Storage():
-    """Main class to manage storage"""
-
+    """A class to manage storage"""
     __engine = None
     __session = None
 
@@ -44,7 +42,7 @@ class Storage():
         return all_obj
 
     def some(self, cls, index):
-        """Get 5 instances of cls based on after"""
+        """Get 5 instances of cls based on index"""
         all_obj = Storage.__session.query(cls).\
             order_by(text("created_at DESC")).all()
         some = []
@@ -86,7 +84,7 @@ class Storage():
 
     def check_user(self, email, password, status="r"):
         """Check if the user with <email> or <password> exists"""
-        if status == "r":
+        if status == "r": # The password is not hashed
             bpassword = password.encode()
             m = md5()
             m.update(bpassword)
@@ -102,10 +100,11 @@ class Storage():
         return False
 
     def credential_user(self, email, password, status="r"):
-        """Check if the user with the email <email> and password
+        """
+        Check if the user with the email <email> and password
         <password> exists
         """
-        if status == "r":
+        if status == "r": # The password is not hashed
             bpassword = password.encode()
             m = md5()
             m.update(bpassword)

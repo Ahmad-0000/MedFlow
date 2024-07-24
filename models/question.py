@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 Contains main questions model
 """
