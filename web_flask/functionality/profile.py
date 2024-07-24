@@ -103,15 +103,15 @@ def update_edu_handler(user_id):
     v_email = request.cookies.get("email", None)
     v_password = request.cookies.get("password", None)
     if not status or status == "out":
-        return make_response(render_template('logfirst.html', cache_id=cache_id), 403)
+        abort(403, 'err_logging')
     if not visiter_id or not v_email or not v_password:
-        return make_response(render_template('regfirst.html', cache_id=cache_id), 403)
+        abort(403, 'err_registeration')
     id_visiter = storage.get(User, visiter_id)
     credentail_visiter = storage.credential_user(v_email, v_password, "h")
     if not id_visiter or not credentail_visiter:
-        return make_response(render_template('regfirst.html', cache_id=cache_id), 403)
+        abort(403, 'err_registeration')
     if id_visiter.to_dict() != credentail_visiter.to_dict():
-        return make_response(render_template("userconflict.html", cache_id=cache_id), 409)
+        abort(409, 'err_userconflict')
     if id_visiter.id != owner_id:
         abort(401)
     edu = request.form.get('body')
