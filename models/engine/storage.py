@@ -85,7 +85,7 @@ class Storage():
         Storage.__session.close()
 
     def check_user(self, email, password, status="r"):
-        """Check if the user with <email> and <password> exists"""
+        """Check if the user with <email> or <password> exists"""
         if status == "r":
             bpassword = password.encode()
             m = md5()
@@ -100,6 +100,18 @@ class Storage():
         if user:
             return user
         return False
+
+    def credential_user(self, email, password, status="r"):
+        """Check if the user with the email <email> and password
+        <password> exists
+        """
+        if status == "r":
+            bpassword = password.encode()
+            m = md5()
+            m.update(bpassword)
+            password = m.hexdigest()
+        return Storage.__session.query(User).filter_by(email=email).\
+               filter_by(password=password).one_or_none()
 
     def question_fts(self, sentence):
         """Perform fts against questions table using <sentence>"""
