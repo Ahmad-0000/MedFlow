@@ -14,6 +14,7 @@ from uuid import uuid4
 
 flask_app = Flask(__name__)
 cache_id = str(uuid4())
+# Custom errors for error handling
 errors = {
     'err_authorization': {
         'title': 'Unauthorized',
@@ -81,10 +82,10 @@ def is_authenticated(user, request):
     password = request.cookies.get("password", None)
     if not email or not password:
         return (False, 403, 'err_registeration')
-    credentail_user = storage.credentail_user(email, password, "h")
-    if not credentail_user:
+    credential_user = storage.credential_user(email, password, "h")
+    if not credential_user:
         return (False, 403, 'err_registeration')
-    if user.to_dict() != credentail_user.to_dict():
+    if user.to_dict() != credential_user.to_dict():
         return (False, 409, 'err_userconflict')
     if status != "in":
         return (False, 403, 'err_logging')
